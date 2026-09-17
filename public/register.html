@@ -31,6 +31,63 @@
      linear-gradient(90deg, rgba(0, 91, 123, 0.06) 1px, transparent 1px);
     background-size: 32px 32px;
    }
+    @keyframes namePop {
+     0% { opacity: 0; transform: translateY(8px); }
+     100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes successPop {
+     0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+     100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes successCheck {
+     0% { stroke-dashoffset: 30; }
+     100% { stroke-dashoffset: 0; }
+    }
+    .name-pop {
+     transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+    .name-pop:focus {
+     transform: translateY(-2px);
+     box-shadow: 0 4px 0 -3px #00adec;
+    }
+    #registrationForm input:not([type="checkbox"]):not([type="radio"]),
+    #registrationForm select {
+     transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+    #registrationForm input:not([type="checkbox"]):not([type="radio"]):focus,
+    #registrationForm select:focus {
+     transform: translateY(-2px);
+     box-shadow: 0 4px 0 -3px #00adec;
+    }
+    .select-field {
+     color: #7c868a;
+     font-variant-caps: all-small-caps;
+     letter-spacing: 0.08em;
+    }
+    .select-field.has-value {
+     color: #0b1214;
+     font-variant-caps: normal;
+     letter-spacing: normal;
+    }
+    .select-field option {
+     color: #35393a;
+     background: #ffffff;
+     font-variant-caps: normal;
+     letter-spacing: normal;
+    }
+    .success-card { animation: successPop 450ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .success-check {
+     stroke-dasharray: 30;
+     stroke-dashoffset: 30;
+     animation: successCheck 500ms 180ms ease-out forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+    .name-pop, .success-card, .success-check {
+     animation: none;
+     transition: none;
+    }
+     .success-check { stroke-dashoffset: 0; }
+    }
   </style>
  </head>
  <body class="antialiased bg-white text-[#0b1214] font-serif">
@@ -51,7 +108,7 @@
       <path d="M3 15l9 6 9-6" stroke-linejoin="round" />
      </svg>
      <span class="font-medium tracking-wide text-sm uppercase"
-      >DOST · 8th RSI Forum</span
+      >DOST · 8th Regional Science and Innovation Forum</span
      >
     </a>
     <nav
@@ -90,11 +147,9 @@
      </p>
      <h1
       id="page-heading"
-      class="font-inter text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-[#ebf5f8] leading-[1.05]"
+      class="font-inter text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-[#ebf5f8] leading-[1.05]"
      >
-      8th Research,<br />
-      Statistic, and<br />
-      Innovation Forum
+      8th RSI FORUM
      </h1>
      <p
       class="font-serif mt-6 text-[#ebf5f8]/80 max-w-xl text-base md:text-lg leading-relaxed"
@@ -304,7 +359,7 @@
           required
           aria-required="true"
           autocomplete="given-name"
-          class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+          class="name-pop w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
          />
         </div>
         <div class="md:col-span-4">
@@ -319,7 +374,7 @@
           id="middleName"
           name="middleName"
           autocomplete="additional-name"
-          class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+          class="name-pop name-pop-last w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
          />
         </div>
         <div class="md:col-span-4">
@@ -352,7 +407,7 @@
           name="gender"
           required
           aria-required="true"
-          class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
+          class="select-field w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
           style="
            background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3Yzg2OGEiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTYgOWw2IDYgNi02IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=&quot;);
            background-repeat: no-repeat;
@@ -380,7 +435,7 @@
           name="classification"
           required
           aria-required="true"
-          class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
+          class="select-field w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
           style="
            background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3Yzg2OGEiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTYgOWw2IDYgNi02IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=&quot;);
            background-repeat: no-repeat;
@@ -399,72 +454,28 @@
          </select>
         </div>
 
-        <fieldset class="md:col-span-12" aria-describedby="ageHelp">
-         <legend
+        <div class="md:col-span-12">
+         <label
+          for="age"
           class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-3"
          >
-          Age Range <span class="text-[#00adec]" aria-hidden="true">*</span>
-          <span id="ageHelp" class="sr-only">Select one age range</span>
-         </legend>
-         <div
-          class="grid grid-cols-2 sm:grid-cols-4 gap-3"
-          role="radiogroup"
-          aria-label="Age Range"
-         >
-          <label class="cursor-pointer">
-           <input
-            type="radio"
-            name="ageRange"
-            value="1-14"
-            required
-            class="sr-only peer"
-           />
-           <span
-            class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors"
-            >1–14</span
-           >
-          </label>
-          <label class="cursor-pointer">
-           <input
-            type="radio"
-            name="ageRange"
-            value="15-30"
-            required
-            class="sr-only peer"
-           />
-           <span
-            class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors"
-            >15–30</span
-           >
-          </label>
-          <label class="cursor-pointer">
-           <input
-            type="radio"
-            name="ageRange"
-            value="31-59"
-            required
-            class="sr-only peer"
-           />
-           <span
-            class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors"
-            >31–59</span
-           >
-          </label>
-          <label class="cursor-pointer">
-           <input
-            type="radio"
-            name="ageRange"
-            value="60+"
-            required
-            class="sr-only peer"
-           />
-           <span
-            class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors"
-            >60+</span
-           >
-          </label>
-         </div>
-        </fieldset>
+          Age <span class="text-[#00adec]" aria-hidden="true">*</span>
+          <span id="ageHelp" class="sr-only">Enter your age</span>
+         </label>
+         <input
+          type="number"
+          id="age"
+          name="age"
+          min="1"
+          max="120"
+          required
+          aria-required="true"
+          aria-describedby="ageHelp"
+          inputmode="numeric"
+          placeholder=""
+          class="w-full max-w-xs bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] placeholder:text-[#7c868a]/60 focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+         />
+        </div>
        </div>
       </section>
 
@@ -504,7 +515,7 @@
          required
          aria-required="true"
          autocomplete="email"
-         placeholder="juan@example.com"
+         placeholder="example@email.com"
          class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] placeholder:text-[#7c868a]/60 focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
         />
         <p class="font-serif text-xs text-[#7c868a] mt-2">
@@ -647,7 +658,7 @@
           name="region"
           required
           aria-required="true"
-          class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
+          class="select-field w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
           style="
            background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3Yzg2OGEiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTYgOWw2IDYgNi02IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=&quot;);
            background-repeat: no-repeat;
@@ -1017,6 +1028,24 @@
       </button>
      </div>
     </div>
+   </div>
+  </div>
+
+  <div
+   id="completionState"
+   class="fixed inset-0 z-[60] hidden items-center justify-center bg-[#002735]/90 backdrop-blur-sm px-4"
+   role="status"
+   aria-live="polite"
+  >
+   <div class="success-card w-full max-w-md bg-white text-center px-6 py-10 md:px-10">
+    <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#e7f7fb]">
+     <svg class="h-8 w-8 text-[#00adec]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path class="success-check" d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" />
+     </svg>
+    </div>
+    <p class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2">Registration Complete</p>
+    <h2 class="font-inter text-2xl font-light text-[#002735]">Thank you for registering.</h2>
+    <p class="font-serif text-sm text-[#7c868a] mt-3">Your event registration and e-signature have been recorded.</p>
    </div>
   </div>
 
