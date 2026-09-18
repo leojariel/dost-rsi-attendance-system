@@ -1,0 +1,1957 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — 8th Research, Statistics, and Innovation Forum</title>
+  <link rel="stylesheet" href="./css/output.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+   href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+   rel="stylesheet"
+  />
+  <style>
+   @custom-variant dark (&:where(.dark, .dark *));
+   .font-inter {
+    font-family:
+     "Inter",
+     system-ui,
+     -apple-system,
+     sans-serif;
+   }
+   .font-serif {
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+   }
+   html {
+    font-size: 16px;
+   }
+   .grid-paper {
+    background-image:
+     linear-gradient(rgba(0, 91, 123, 0.04) 1px, transparent 1px),
+     linear-gradient(90deg, rgba(0, 91, 123, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+   }
+   .dark .grid-paper {
+    background-image:
+     linear-gradient(rgba(0, 173, 236, 0.05) 1px, transparent 1px),
+     linear-gradient(90deg, rgba(0, 173, 236, 0.05) 1px, transparent 1px);
+   }
+   .scroll-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+   }
+   .scroll-thin::-webkit-scrollbar-track {
+    background: transparent;
+   }
+   .scroll-thin::-webkit-scrollbar-thumb {
+    background: rgba(124, 134, 138, 0.35);
+   }
+   .scroll-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 173, 236, 0.6);
+   }
+   .gradient-avatar {
+    background: linear-gradient(135deg, #00adec 0%, #005b7b 60%, #002735 100%);
+   }
+   .page {
+    display: none;
+   }
+   .page.active {
+    display: block;
+   }
+   .cert-a4 {
+    width: 297mm;
+    height: 210mm;
+    background: #ffffff;
+    color: #0b1214;
+   }
+   @media print {
+    body * {
+     visibility: hidden;
+    }
+    #certPrintArea,
+    #certPrintArea * {
+     visibility: visible;
+    }
+    #certPrintArea {
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 297mm;
+     height: 210mm;
+    }
+    @page {
+     size: A4 landscape;
+     margin: 0;
+    }
+   }
+  </style>
+  <script>
+   (function () {
+    try {
+     var stored = localStorage.getItem("rsi-theme");
+     if (stored === "dark") {
+      document.documentElement.classList.add("dark");
+     } else {
+      document.documentElement.classList.remove("dark");
+      if (stored === null) localStorage.setItem("rsi-theme", "light");
+     }
+    } catch (e) {
+     document.documentElement.classList.remove("dark");
+    }
+   })();
+  </script>
+ </head>
+ <body
+  class="antialiased bg-white dark:bg-[#0b1214] text-[#0b1214] dark:text-[#ebf5f8] font-serif transition-colors duration-200"
+ >
+  <div
+   id="authGate"
+   class="fixed inset-0 z-[100] bg-white dark:bg-[#0b1214] flex items-center justify-center px-4 transition-colors duration-200"
+  >
+   <div class="w-full max-w-md">
+    <div
+     class="flex items-center gap-2 text-[#002735] dark:text-[#ebf5f8] mb-8 justify-center"
+    >
+     <svg
+      class="w-7 h-7 text-[#00adec]"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"
+     >
+      <path d="M12 3l9 6-9 6-9-6 9-6Z" stroke-linejoin="round" />
+      <path d="M3 15l9 6 9-6" stroke-linejoin="round" />
+     </svg>
+     <span class="font-inter font-medium tracking-wide text-sm uppercase"
+      >DOST · 8th RSI Forum</span
+     >
+    </div>
+
+    <div
+     id="superAdminStep"
+     class="bg-white dark:bg-[#002735] border border-[#7c868a]/30 p-8"
+    >
+     <p
+      class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+     >
+      Step 01
+     </p>
+     <h1
+      class="font-inter text-2xl font-light text-[#002735] dark:text-[#ebf5f8] mb-1"
+     >
+      Super Admin Access
+     </h1>
+     <p class="font-serif text-xs text-[#7c868a] italic mb-6">
+      Enter the master key to unlock admin authentication.
+     </p>
+
+     <label
+      for="superPassword"
+      class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+     >
+      Super Admin Password
+     </label>
+     <input
+      type="password"
+      id="superPassword"
+      class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors mb-2"
+      placeholder="••••••••••••"
+     />
+     <p id="superError" class="font-serif text-xs text-[#00adec] h-4 mb-4"></p>
+
+     <button
+      type="button"
+      id="superSubmit"
+      class="w-full bg-[#00adec] text-white font-inter font-medium text-[10px] tracking-[0.25em] uppercase py-3 px-4 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+     >
+      Unlock Admin Authentication
+     </button>
+     <p class="font-serif text-[10px] text-[#7c868a] mt-3 text-center">
+      Hint: The Man Who Can't Be Moved
+     </p>
+    </div>
+
+    <div
+     id="adminAuthStep"
+     class="hidden bg-white dark:bg-[#002735] border border-[#7c868a]/30 p-8"
+    >
+     <p
+      class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+     >
+      Step 02
+     </p>
+     <h1
+      id="adminAuthTitle"
+      class="font-inter text-2xl font-light text-[#002735] dark:text-[#ebf5f8] mb-1"
+     >
+      Admin Login
+     </h1>
+     <p
+      id="adminAuthSubtitle"
+      class="font-serif text-xs text-[#7c868a] italic mb-6"
+     >
+      Sign in to access the console.
+     </p>
+
+     <div id="adminRegisterForm" class="hidden space-y-4">
+      <div>
+       <label
+        for="regName"
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Full Name</label
+       >
+       <input
+        type="text"
+        id="regName"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+       />
+      </div>
+      <div>
+       <label
+        for="regPassword"
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Password</label
+       >
+       <input
+        type="password"
+        id="regPassword"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+       />
+       <p class="font-serif text-[10px] text-[#7c868a] mt-1">
+        Minimum 8 characters.
+       </p>
+      </div>
+      <div>
+       <label
+        for="regConfirm"
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Confirm Password</label
+       >
+       <input
+        type="password"
+        id="regConfirm"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+       />
+      </div>
+      <p id="regError" class="font-serif text-xs text-[#00adec] h-4"></p>
+      <button
+       type="button"
+       id="regSubmit"
+       class="w-full bg-[#00adec] text-white font-inter font-medium text-[10px] tracking-[0.25em] uppercase py-3 px-4 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+      >
+       Register
+      </button>
+      <p
+       class="font-inter text-[10px] tracking-widest uppercase text-center text-[#7c868a]"
+      >
+       Already have an account?
+       <button
+        type="button"
+        id="toLogin"
+        class="text-[#00adec] cursor-pointer hover:underline ml-1"
+       >
+        Login
+       </button>
+      </p>
+     </div>
+
+     <div id="adminLoginForm" class="hidden space-y-4">
+      <div>
+       <label
+        for="loginName"
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Full Name</label
+       >
+       <input
+        type="text"
+        id="loginName"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+       />
+      </div>
+      <div>
+       <label
+        for="loginPassword"
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Password</label
+       >
+       <input
+        type="password"
+        id="loginPassword"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+       />
+      </div>
+      <p id="loginError" class="font-serif text-xs text-[#00adec] h-4"></p>
+      <button
+       type="button"
+       id="loginSubmit"
+       class="w-full bg-[#00adec] text-white font-inter font-medium text-[10px] tracking-[0.25em] uppercase py-3 px-4 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+      >
+       Login
+      </button>
+      <p
+       class="font-inter text-[10px] tracking-widest uppercase text-center text-[#7c868a]"
+      >
+       Need an account?
+       <button
+        type="button"
+        id="toRegister"
+        class="text-[#00adec] hover:underline ml-1 cursor-pointer"
+       >
+        Register
+       </button>
+      </p>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div id="appShell" class="hidden">
+   <div class="flex h-screen overflow-hidden">
+    <aside
+     class="w-16 md:w-60 shrink-0 bg-white dark:bg-[#002735] border-r border-[#7c868a]/20 flex flex-col justify-between transition-colors duration-200"
+    >
+     <div class="flex flex-col min-h-0 flex-1">
+      <div
+       class="h-14 shrink-0 flex items-center gap-2 px-4 md:px-5 border-b border-[#7c868a]/20"
+      >
+       <svg
+        class="w-6 h-6 text-[#00adec] shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+       >
+        <path d="M12 3l9 6-9 6-9-6 9-6Z" stroke-linejoin="round" />
+        <path d="M3 15l9 6 9-6" stroke-linejoin="round" />
+       </svg>
+       <span
+        class="font-inter font-medium tracking-wide text-xs uppercase text-[#002735] dark:text-[#ebf5f8] hidden md:block"
+        >DOST · 8th RSI Forum</span
+       >
+      </div>
+
+      <nav
+       class="py-4 space-y-1 overflow-y-auto scroll-thin flex-1"
+       aria-label="Admin navigation"
+      >
+       <button
+        type="button"
+        data-page="dashboard"
+        class="nav-item w-full flex items-center gap-3 px-4 md:px-5 py-3 text-left font-inter text-xs uppercase tracking-widest text-[#35393a] dark:text-[#ebf5f8]/80 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#0b1214]/60 border-l-2 border-transparent transition-colors cursor-pointer"
+       >
+        <svg
+         class="w-4 h-4 shrink-0"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <rect x="3" y="3" width="7" height="9" />
+         <rect x="14" y="3" width="7" height="5" />
+         <rect x="14" y="12" width="7" height="9" />
+         <rect x="3" y="16" width="7" height="5" />
+        </svg>
+        <span class="hidden md:inline">Dashboard</span>
+       </button>
+       <button
+        type="button"
+        data-page="scanner"
+        class="nav-item w-full flex items-center gap-3 px-4 md:px-5 py-3 text-left font-inter text-xs uppercase tracking-widest text-[#35393a] dark:text-[#ebf5f8]/80 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#0b1214]/60 border-l-2 border-transparent transition-colors cursor-pointer"
+       >
+        <svg
+         class="w-4 h-4 shrink-0"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <path
+          d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"
+          stroke-linecap="round"
+         />
+         <path d="M3 12h18" />
+        </svg>
+        <span class="hidden md:inline">Scan QR</span>
+       </button>
+       <button
+        type="button"
+        data-page="attendees"
+        class="nav-item w-full flex items-center gap-3 px-4 md:px-5 py-3 text-left font-inter text-xs uppercase tracking-widest text-[#35393a] dark:text-[#ebf5f8]/80 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#0b1214]/60 border-l-2 border-transparent transition-colors cursor-pointer"
+       >
+        <svg
+         class="w-4 h-4 shrink-0"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <path
+          d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+          stroke-linecap="round"
+         />
+         <circle cx="9" cy="7" r="4" />
+         <path
+          d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+          stroke-linecap="round"
+         />
+        </svg>
+        <span class="hidden md:inline">Attendees</span>
+       </button>
+       <button
+        type="button"
+        data-page="confirmed"
+        class="nav-item w-full flex items-center gap-3 px-4 md:px-5 py-3 text-left font-inter text-xs uppercase tracking-widest text-[#35393a] dark:text-[#ebf5f8]/80 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#0b1214]/60 border-l-2 border-transparent transition-colors cursor-pointer"
+       >
+        <svg
+         class="w-4 h-4 shrink-0"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <circle cx="12" cy="12" r="9" />
+         <path
+          d="M8 12l3 3 5-6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+         />
+        </svg>
+        <span class="hidden md:inline">Confirmed</span>
+       </button>
+       <button
+        type="button"
+        data-page="absent"
+        class="nav-item w-full flex items-center gap-3 px-4 md:px-5 py-3 text-left font-inter text-xs uppercase tracking-widest text-[#35393a] dark:text-[#ebf5f8]/80 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#0b1214]/60 border-l-2 border-transparent transition-colors cursor-pointer"
+       >
+        <svg
+         class="w-4 h-4 shrink-0"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <circle cx="12" cy="12" r="9" />
+         <path d="M9 9l6 6M15 9l-6 6" stroke-linecap="round" />
+        </svg>
+        <span class="hidden md:inline">Absent</span>
+       </button>
+       <button
+        type="button"
+        data-page="certificates"
+        class="nav-item w-full flex items-center gap-3 px-4 md:px-5 py-3 text-left font-inter text-xs uppercase tracking-widest text-[#35393a] dark:text-[#ebf5f8]/80 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#0b1214]/60 border-l-2 border-transparent transition-colors cursor-pointer"
+       >
+        <svg
+         class="w-4 h-4 shrink-0"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <path d="M6 3h9l5 5v13H6z" stroke-linejoin="round" />
+         <path d="M15 3v5h5M9 13h6M9 17h6" stroke-linecap="round" />
+        </svg>
+        <span class="hidden md:inline">Certificates</span>
+       </button>
+       <button
+        type="button"
+        data-page="profile"
+        class="nav-item w-full flex items-center gap-3 px-4 md:px-5 py-3 text-left font-inter text-xs uppercase tracking-widest text-[#35393a] dark:text-[#ebf5f8]/80 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#0b1214]/60 border-l-2 border-transparent transition-colors cursor-pointer"
+       >
+        <svg
+         class="w-4 h-4 shrink-0"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <circle cx="12" cy="8" r="4" />
+         <path
+          d="M4 21v-1a7 7 0 0 1 7-7h2a7 7 0 0 1 7 7v1"
+          stroke-linecap="round"
+         />
+        </svg>
+        <span class="hidden md:inline">Profile</span>
+       </button>
+      </nav>
+     </div>
+
+     <div class="relative p-3 border-t border-[#7c868a]/20 shrink-0">
+      <button
+       type="button"
+       id="userMenuBtn"
+       class="w-full flex items-center gap-3 px-2 py-2 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#0b1214]/60 transition-colors cursor-pointer"
+       aria-haspopup="true"
+       aria-expanded="false"
+      >
+       <span
+        class="gradient-avatar w-8 h-8 rounded-full flex items-center justify-center text-white font-inter text-xs font-medium shrink-0"
+       >
+        <span id="userInitials">AD</span>
+       </span>
+       <span class="hidden md:flex flex-col items-start text-left">
+        <span
+         id="userNameDisplay"
+         class="font-inter text-xs font-medium text-[#002735] dark:text-[#ebf5f8]"
+         >Admin User</span
+        >
+        <span
+         class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a]"
+         >Administrator</span
+        >
+       </span>
+       <svg
+        class="w-3 h-3 ml-auto text-[#7c868a] hidden md:block"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+       >
+        <path
+         d="M18 15l-6-6-6 6"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+        />
+       </svg>
+      </button>
+
+      <div
+       id="userDropup"
+       class="hidden absolute bottom-full left-3 right-3 mb-2 bg-white dark:bg-[#0b1214] border border-[#7c868a]/30 shadow-lg"
+       role="menu"
+      >
+       <button
+        type="button"
+        data-page="profile"
+        class="nav-item w-full text-left px-4 py-3 font-inter text-xs tracking-widest uppercase text-[#35393a] dark:text-[#ebf5f8]/80 hover:bg-[#ebf5f8]/60 dark:hover:bg-[#002735] transition-colors cursor-pointer"
+        role="menuitem"
+       >
+        View Profile
+       </button>
+       <button
+        type="button"
+        id="logoutBtn"
+        class="w-full text-left px-4 py-3 font-inter text-xs tracking-widest uppercase text-[#00adec] hover:bg-[#ebf5f8]/60 dark:hover:bg-[#002735] border-t border-[#7c868a]/20 transition-colors cursor-pointer"
+        role="menuitem"
+       >
+        Logout
+       </button>
+      </div>
+     </div>
+    </aside>
+
+    <div class="flex-1 min-w-0 flex flex-col overflow-hidden">
+     <header
+      class="h-14 shrink-0 bg-white dark:bg-[#002735] border-b border-[#7c868a]/20 transition-colors duration-200"
+     >
+      <div class="h-full flex items-center gap-4 px-4 md:px-6">
+       <div class="flex-1 max-w-md">
+        <div class="relative">
+         <svg
+          class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7c868a]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+         >
+          <circle cx="11" cy="11" r="7" />
+          <path d="M20 20l-3.5-3.5" stroke-linecap="round" />
+         </svg>
+         <input
+          type="search"
+          id="globalSearch"
+          placeholder="Search attendees, IDs, or emails..."
+          class="w-full bg-white dark:bg-[#0b1214] border border-[#7c868a]/25 pl-9 pr-3 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] placeholder:text-[#7c868a] focus:outline-none focus:border-[#00adec] focus:ring-1 focus:ring-[#00adec] transition-colors"
+         />
+        </div>
+       </div>
+
+       <button
+        type="button"
+        id="themeToggle"
+        class="w-9 h-9 flex items-center justify-center border border-[#7c868a]/30 text-[#35393a] dark:text-[#ebf5f8] hover:border-[#00adec] hover:text-[#00adec] focus:outline-none focus:ring-2 focus:ring-[#00adec] transition-colors shrink-0 ml-auto cursor-pointer"
+        aria-label="Toggle theme"
+       >
+        <svg
+         class="w-4 h-4 hidden dark:block"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <circle cx="12" cy="12" r="4" />
+         <path
+          d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+          stroke-linecap="round"
+         />
+        </svg>
+        <svg
+         class="w-4 h-4 block dark:hidden"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         aria-hidden="true"
+        >
+         <path
+          d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"
+          stroke-linejoin="round"
+         />
+        </svg>
+       </button>
+      </div>
+     </header>
+
+     <main
+      class="flex-1 min-w-0 overflow-y-auto scroll-thin bg-white dark:bg-[#0b1214] transition-colors duration-200"
+     >
+      <section id="page-dashboard" class="page p-6 md:p-8">
+       <div class="mb-8">
+        <p
+         class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+        >
+         Overview
+        </p>
+        <h1
+         class="font-inter text-3xl font-light text-[#002735] dark:text-[#ebf5f8]"
+        >
+         Dashboard
+        </h1>
+        <p class="font-serif text-sm text-[#7c868a] italic mt-1">
+         Real-time attendance metrics for the 8th RSI Forum.
+        </p>
+       </div>
+
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-5">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-3"
+         >
+          Total Registered
+         </p>
+         <p
+          class="font-inter text-4xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          1,248
+         </p>
+         <p class="font-serif text-xs text-[#7c868a] mt-2">
+          +32 since last hour
+         </p>
+        </div>
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-5">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-3"
+         >
+          Confirmed Attendance
+         </p>
+         <p class="font-inter text-4xl font-light text-[#00adec]">876</p>
+         <p class="font-serif text-xs text-[#7c868a] mt-2">
+          70.2% check-in rate
+         </p>
+        </div>
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-5">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-3"
+         >
+          Absent
+         </p>
+         <p
+          class="font-inter text-4xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          372
+         </p>
+         <p class="font-serif text-xs text-[#7c868a] mt-2">
+          29.8% of registered
+         </p>
+        </div>
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-5">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-3"
+         >
+          Scans Today
+         </p>
+         <p
+          class="font-inter text-4xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          312
+         </p>
+         <p class="font-serif text-xs text-[#7c868a] mt-2">
+          Peak 09:00 – 10:00
+         </p>
+        </div>
+       </div>
+
+       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+        <div
+         class="lg:col-span-2 bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-6"
+        >
+         <h2
+          class="font-inter text-xs tracking-[0.2em] uppercase text-[#002735] dark:text-[#ebf5f8] mb-4"
+         >
+          Check-in Timeline
+         </h2>
+         <div class="h-48 flex items-end gap-2">
+          <div class="flex-1 bg-[#00adec]/20 h-[20%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >08</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec]/40 h-[55%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >09</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec] h-[85%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >10</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec]/70 h-[65%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >11</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec]/50 h-[45%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >12</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec]/30 h-[30%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >13</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec]/60 h-[60%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >14</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec]/35 h-[35%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >15</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec]/25 h-[25%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >16</span
+           >
+          </div>
+          <div class="flex-1 bg-[#00adec]/15 h-[15%] relative">
+           <span
+            class="absolute -top-5 left-0 right-0 text-center font-inter text-[9px] text-[#7c868a]"
+            >17</span
+           >
+          </div>
+         </div>
+         <p class="font-serif text-xs text-[#7c868a] mt-4">
+          Scans per hour across all entry points.
+         </p>
+        </div>
+
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-6">
+         <h2
+          class="font-inter text-xs tracking-[0.2em] uppercase text-[#002735] dark:text-[#ebf5f8] mb-4"
+         >
+          Attendee Breakdown
+         </h2>
+         <ul class="space-y-4">
+          <li>
+           <div
+            class="flex justify-between font-inter text-xs text-[#35393a] dark:text-[#ebf5f8]/80 mb-1"
+           >
+            <span>Participant / Walk-in</span
+            ><span class="text-[#7c868a]">486</span>
+           </div>
+           <div class="h-1.5 bg-[#7c868a]/15">
+            <div class="h-full bg-[#00adec]" style="width: 55%"></div>
+           </div>
+          </li>
+          <li>
+           <div
+            class="flex justify-between font-inter text-xs text-[#35393a] dark:text-[#ebf5f8]/80 mb-1"
+           >
+            <span>Student / Academe</span
+            ><span class="text-[#7c868a]">312</span>
+           </div>
+           <div class="h-1.5 bg-[#7c868a]/15">
+            <div class="h-full bg-[#00adec]/70" style="width: 35%"></div>
+           </div>
+          </li>
+          <li>
+           <div
+            class="flex justify-between font-inter text-xs text-[#35393a] dark:text-[#ebf5f8]/80 mb-1"
+           >
+            <span>Government Employee</span
+            ><span class="text-[#7c868a]">248</span>
+           </div>
+           <div class="h-1.5 bg-[#7c868a]/15">
+            <div class="h-full bg-[#005b7b]" style="width: 28%"></div>
+           </div>
+          </li>
+          <li>
+           <div
+            class="flex justify-between font-inter text-xs text-[#35393a] dark:text-[#ebf5f8]/80 mb-1"
+           >
+            <span>Business / Entrepreneur</span
+            ><span class="text-[#7c868a]">142</span>
+           </div>
+           <div class="h-1.5 bg-[#7c868a]/15">
+            <div
+             class="h-full bg-[#002735] dark:bg-[#00adec]/40"
+             style="width: 16%"
+            ></div>
+           </div>
+          </li>
+          <li>
+           <div
+            class="flex justify-between font-inter text-xs text-[#35393a] dark:text-[#ebf5f8]/80 mb-1"
+           >
+            <span>Others</span><span class="text-[#7c868a]">60</span>
+           </div>
+           <div class="h-1.5 bg-[#7c868a]/15">
+            <div class="h-full bg-[#7c868a]" style="width: 7%"></div>
+           </div>
+          </li>
+         </ul>
+        </div>
+       </div>
+
+       <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-6">
+        <div class="flex items-center justify-between mb-4">
+         <h2
+          class="font-inter text-xs tracking-[0.2em] uppercase text-[#002735] dark:text-[#ebf5f8]"
+         >
+          Recent Check-ins
+         </h2>
+         <button
+          type="button"
+          data-page="scanner"
+          class="nav-item font-inter text-[10px] tracking-[0.2em] uppercase text-[#00adec] hover:underline cursor-pointer"
+         >
+          Open Scanner
+         </button>
+        </div>
+        <div class="overflow-x-auto scroll-thin">
+         <table class="w-full text-left">
+          <thead>
+           <tr class="border-b border-[#7c868a]/25">
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 pr-4"
+            >
+             Name
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 pr-4"
+            >
+             Type
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 pr-4"
+            >
+             Time
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3"
+            >
+             Status
+            </th>
+           </tr>
+          </thead>
+          <tbody class="font-serif text-sm">
+           <tr class="border-b border-[#7c868a]/10">
+            <td class="py-3 pr-4 text-[#0b1214] dark:text-[#ebf5f8]">
+             Maria Santos
+            </td>
+            <td class="py-3 pr-4 text-[#7c868a]">Participant</td>
+            <td class="py-3 pr-4 text-[#7c868a]">10:42 AM</td>
+            <td class="py-3">
+             <span
+              class="font-inter text-[10px] tracking-widest uppercase text-[#00adec] border border-[#00adec]/50 px-2 py-1"
+              >Confirmed</span
+             >
+            </td>
+           </tr>
+           <tr class="border-b border-[#7c868a]/10">
+            <td class="py-3 pr-4 text-[#0b1214] dark:text-[#ebf5f8]">
+             Juan Dela Cruz
+            </td>
+            <td class="py-3 pr-4 text-[#7c868a]">Speaker</td>
+            <td class="py-3 pr-4 text-[#7c868a]">10:38 AM</td>
+            <td class="py-3">
+             <span
+              class="font-inter text-[10px] tracking-widest uppercase text-[#00adec] border border-[#00adec]/50 px-2 py-1"
+              >Confirmed</span
+             >
+            </td>
+           </tr>
+           <tr class="border-b border-[#7c868a]/10">
+            <td class="py-3 pr-4 text-[#0b1214] dark:text-[#ebf5f8]">
+             Andres Bonifacio
+            </td>
+            <td class="py-3 pr-4 text-[#7c868a]">Exhibitor</td>
+            <td class="py-3 pr-4 text-[#7c868a]">10:31 AM</td>
+            <td class="py-3">
+             <span
+              class="font-inter text-[10px] tracking-widest uppercase text-[#00adec] border border-[#00adec]/50 px-2 py-1"
+              >Confirmed</span
+             >
+            </td>
+           </tr>
+           <tr>
+            <td class="py-3 pr-4 text-[#0b1214] dark:text-[#ebf5f8]">
+             Jose Rizal
+            </td>
+            <td class="py-3 pr-4 text-[#7c868a]">Volunteer</td>
+            <td class="py-3 pr-4 text-[#7c868a]">10:22 AM</td>
+            <td class="py-3">
+             <span
+              class="font-inter text-[10px] tracking-widest uppercase text-[#00adec] border border-[#00adec]/50 px-2 py-1"
+              >Confirmed</span
+             >
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </section>
+
+      <section id="page-scanner" class="page p-6 md:p-8">
+       <div class="mb-6 flex items-center justify-between flex-wrap gap-4">
+        <div>
+         <p
+          class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+         >
+          Live Check-in
+         </p>
+         <h1
+          class="font-inter text-3xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          QR Scanner
+         </h1>
+         <p class="font-serif text-sm text-[#7c868a] italic mt-1">
+          Scan attendee QR codes to confirm entry.
+         </p>
+        </div>
+        <div class="flex items-center gap-3">
+         <span
+          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a]"
+          >Camera</span
+         >
+         <span
+          class="inline-flex items-center gap-2 font-inter text-[10px] tracking-widest uppercase text-[#00adec]"
+         >
+          <span class="w-2 h-2 bg-[#00adec] animate-pulse"></span>
+          Live
+         </span>
+        </div>
+       </div>
+
+       <div
+        class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-[calc(100vh-260px)]"
+       >
+        <div
+         class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 flex flex-col h-full min-h-[500px] overflow-hidden"
+        >
+         <div
+          class="border-b border-[#7c868a]/25 px-5 py-4 flex items-center justify-between flex-wrap gap-3"
+         >
+          <div>
+           <h2
+            class="font-inter text-xs tracking-[0.2em] uppercase text-[#002735] dark:text-[#ebf5f8]"
+           >
+            Confirmed Attendees
+           </h2>
+           <p class="font-serif text-xs text-[#7c868a] mt-0.5">
+            Today · <span id="confirmedCount">0</span> scanned
+           </p>
+          </div>
+          <div class="flex items-center gap-2">
+           <div class="relative">
+            <select
+             id="sortField"
+             class="font-inter text-[10px] tracking-widest uppercase bg-transparent border border-[#7c868a]/30 text-[#35393a] dark:text-[#ebf5f8] px-2 py-1.5 focus:outline-none focus:border-[#00adec] appearance-none pr-6 cursor-pointer"
+             style="
+              background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3Yzg2OGEiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTYgOWw2IDYgNi02Ii8+PC9zdmc+&quot;);
+              background-repeat: no-repeat;
+              background-position: right 6px center;
+             "
+            >
+             <option value="time">Time</option>
+             <option value="firstName">First Name</option>
+             <option value="lastName">Last Name</option>
+            </select>
+           </div>
+           <button
+            type="button"
+            id="sortDir"
+            class="font-inter text-[10px] tracking-widest uppercase border border-[#7c868a]/30 text-[#35393a] dark:text-[#ebf5f8] px-2 py-1.5 hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer"
+            aria-label="Toggle sort direction"
+           >
+            DESC
+           </button>
+           <button
+            type="button"
+            id="refreshConfirmed"
+            class="w-7 h-7 flex items-center justify-center border border-[#7c868a]/30 text-[#35393a] dark:text-[#ebf5f8] hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer"
+            aria-label="Refresh list"
+           >
+            <svg
+             class="w-3.5 h-3.5"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             aria-hidden="true"
+            >
+             <path
+              d="M21 12a9 9 0 1 1-3-6.7L21 8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+             />
+             <path
+              d="M21 3v5h-5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+             />
+            </svg>
+           </button>
+          </div>
+         </div>
+         <div
+          class="flex-1 min-h-0 overflow-y-auto scroll-thin"
+          id="confirmedList"
+         >
+          <div class="divide-y divide-[#7c868a]/15"></div>
+         </div>
+        </div>
+
+        <div
+         class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 flex flex-col h-full min-h-[500px] overflow-hidden"
+        >
+         <div
+          class="border-b border-[#7c868a]/25 px-5 py-4 flex items-center justify-between"
+         >
+          <div>
+           <h2
+            class="font-inter text-xs tracking-[0.2em] uppercase text-[#002735] dark:text-[#ebf5f8]"
+           >
+            Camera Feed
+           </h2>
+           <p class="font-serif text-xs text-[#7c868a] mt-0.5">
+            Align QR code within frame
+           </p>
+          </div>
+          <button
+           type="button"
+           id="toggleCamera"
+           class="font-inter text-[10px] tracking-widest uppercase border border-[#7c868a]/30 text-[#35393a] dark:text-[#ebf5f8] px-3 py-1.5 hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer"
+          >
+           Stop
+          </button>
+         </div>
+         <div
+          class="flex-1 min-h-0 bg-[#0b1214] relative flex items-center justify-center"
+         >
+          <div class="text-center">
+           <svg
+            class="w-16 h-16 mx-auto text-[#00adec]/40 mb-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            aria-hidden="true"
+           >
+            <path
+             d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"
+             stroke-linecap="round"
+            />
+            <path d="M3 12h18" />
+           </svg>
+           <p
+            class="font-inter text-xs tracking-widest uppercase text-[#7c868a]"
+           >
+            Camera Preview
+           </p>
+           <p class="font-serif text-xs text-[#7c868a]/60 mt-1 italic">
+            Awaiting camera permission
+           </p>
+          </div>
+
+          <div
+           class="absolute inset-8 border-2 border-[#00adec]/50 pointer-events-none"
+          >
+           <span
+            class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#00adec]"
+           ></span>
+           <span
+            class="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#00adec]"
+           ></span>
+           <span
+            class="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-[#00adec]"
+           ></span>
+           <span
+            class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[#00adec]"
+           ></span>
+          </div>
+         </div>
+         <div
+          class="border-t border-[#7c868a]/25 px-5 py-4 flex items-center justify-between"
+         >
+          <span
+           class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a]"
+           >Last scan</span
+          >
+          <span
+           id="lastScanLabel"
+           class="font-serif text-xs text-[#002735] dark:text-[#ebf5f8]"
+           >No scan yet</span
+          >
+          <button
+           type="button"
+           id="simulateScan"
+           class="font-inter text-[10px] tracking-widest uppercase bg-[#00adec] text-white px-3 py-1.5 hover:bg-[#005b7b] transition-colors cursor-pointer"
+          >
+           Simulate Scan
+          </button>
+         </div>
+        </div>
+       </div>
+      </section>
+
+      <section id="page-attendees" class="page p-6 md:p-8">
+       <div class="mb-6 flex items-end justify-between flex-wrap gap-4">
+        <div>
+         <p
+          class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+         >
+          Registry
+         </p>
+         <h1
+          class="font-inter text-3xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          Registered Attendees
+         </h1>
+         <p class="font-serif text-sm text-[#7c868a] italic mt-1">
+          Manage all registrations for the forum.
+         </p>
+        </div>
+        <button
+         type="button"
+         id="addAttendeeBtn"
+         class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2.5 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+        >
+         Add Attendee
+        </button>
+       </div>
+
+       <div
+        class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 overflow-hidden"
+       >
+        <div class="overflow-x-auto scroll-thin">
+         <table class="w-full text-left min-w-[900px]">
+          <thead>
+           <tr
+            class="border-b border-[#7c868a]/25 bg-[#ebf5f8]/50 dark:bg-[#0b1214]/50"
+           >
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Name
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Email
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Gender
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Age
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Type
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Status
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4 text-right"
+            >
+             Actions
+            </th>
+           </tr>
+          </thead>
+          <tbody
+           id="attendeesBody"
+           class="font-serif text-sm divide-y divide-[#7c868a]/15"
+          ></tbody>
+         </table>
+        </div>
+       </div>
+      </section>
+
+      <section id="page-confirmed" class="page p-6 md:p-8">
+       <div class="mb-6">
+        <p
+         class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+        >
+         Attendance · Confirmed
+        </p>
+        <h1
+         class="font-inter text-3xl font-light text-[#002735] dark:text-[#ebf5f8]"
+        >
+         Confirmed Attendees
+        </h1>
+        <p class="font-serif text-sm text-[#7c868a] italic mt-1">
+         Attendees who successfully scanned their QR on entry.
+        </p>
+       </div>
+
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-4">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-2"
+         >
+          Total Confirmed
+         </p>
+         <p class="font-inter text-2xl font-light text-[#00adec]">876</p>
+        </div>
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-4">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-2"
+         >
+          Check-in Rate
+         </p>
+         <p
+          class="font-inter text-2xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          70.2%
+         </p>
+        </div>
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-4">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-2"
+         >
+          Last Update
+         </p>
+         <p
+          class="font-inter text-2xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          10:42 AM
+         </p>
+        </div>
+       </div>
+
+       <div
+        class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 overflow-hidden"
+       >
+        <div class="overflow-x-auto scroll-thin">
+         <table class="w-full text-left min-w-[800px]">
+          <thead>
+           <tr
+            class="border-b border-[#7c868a]/25 bg-[#ebf5f8]/50 dark:bg-[#0b1214]/50"
+           >
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Name
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Gender
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Age
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Classification
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Confirmed At
+            </th>
+           </tr>
+          </thead>
+          <tbody
+           id="confirmedTableBody"
+           class="font-serif text-sm divide-y divide-[#7c868a]/15"
+          ></tbody>
+         </table>
+        </div>
+       </div>
+      </section>
+
+      <section id="page-absent" class="page p-6 md:p-8">
+       <div class="mb-6">
+        <p
+         class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+        >
+         Attendance · Absent
+        </p>
+        <h1
+         class="font-inter text-3xl font-light text-[#002735] dark:text-[#ebf5f8]"
+        >
+         Absent Attendees
+        </h1>
+        <p class="font-serif text-sm text-[#7c868a] italic mt-1">
+         Registered attendees without a confirmed scan.
+        </p>
+       </div>
+
+       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-4">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-2"
+         >
+          Total Absent
+         </p>
+         <p
+          class="font-inter text-2xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          372
+         </p>
+        </div>
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-4">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-2"
+         >
+          Follow-up Sent
+         </p>
+         <p
+          class="font-inter text-2xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          204
+         </p>
+        </div>
+        <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-4">
+         <p
+          class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] mb-2"
+         >
+          Pending Review
+         </p>
+         <p
+          class="font-inter text-2xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          168
+         </p>
+        </div>
+       </div>
+
+       <div
+        class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 overflow-hidden"
+       >
+        <div class="overflow-x-auto scroll-thin">
+         <table class="w-full text-left min-w-[800px]">
+          <thead>
+           <tr
+            class="border-b border-[#7c868a]/25 bg-[#ebf5f8]/50 dark:bg-[#0b1214]/50"
+           >
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Name
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Email
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Gender
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Age
+            </th>
+            <th
+             class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a] py-3 px-4"
+            >
+             Classification
+            </th>
+           </tr>
+          </thead>
+          <tbody
+           id="absentTableBody"
+           class="font-serif text-sm divide-y divide-[#7c868a]/15"
+          ></tbody>
+         </table>
+        </div>
+       </div>
+      </section>
+
+      <section id="page-certificates" class="page p-6 md:p-8">
+       <div class="mb-6 flex items-end justify-between flex-wrap gap-4">
+        <div>
+         <p
+          class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+         >
+          Certificates
+         </p>
+         <h1
+          class="font-inter text-3xl font-light text-[#002735] dark:text-[#ebf5f8]"
+         >
+          Certificate Templates
+         </h1>
+         <p class="font-serif text-sm text-[#7c868a] italic mt-1">
+          Generate and print certificates for confirmed attendees.
+         </p>
+        </div>
+        <button
+         type="button"
+         id="printAllCerts"
+         class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2.5 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+        >
+         Print All
+        </button>
+       </div>
+
+       <div
+        id="certGrid"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+       ></div>
+      </section>
+
+      <section id="page-profile" class="page p-6 md:p-8">
+       <div class="mb-6">
+        <p
+         class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+        >
+         Account
+        </p>
+        <h1
+         class="font-inter text-3xl font-light text-[#002735] dark:text-[#ebf5f8]"
+        >
+         Admin Profile
+        </h1>
+        <p class="font-serif text-sm text-[#7c868a] italic mt-1">
+         Manage your credentials and account information.
+        </p>
+       </div>
+
+       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div
+         class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-6 flex flex-col items-center text-center"
+        >
+         <span
+          class="gradient-avatar w-24 h-24 rounded-full flex items-center justify-center text-white font-inter text-2xl font-medium mb-4"
+         >
+          <span id="profileInitials">AD</span>
+         </span>
+         <p
+          id="profileName"
+          class="font-inter text-lg text-[#002735] dark:text-[#ebf5f8]"
+         >
+          Admin User
+         </p>
+         <p
+          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] mt-1"
+         >
+          Administrator
+         </p>
+         <p class="font-serif text-sm text-[#7c868a] mt-4">admin@dost.gov.ph</p>
+         <p class="font-serif text-xs text-[#7c868a] italic mt-1">
+          Member since Oct 2026
+         </p>
+        </div>
+
+        <div
+         class="lg:col-span-2 bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-6"
+        >
+         <h2
+          class="font-inter text-xs tracking-[0.2em] uppercase text-[#002735] dark:text-[#ebf5f8] mb-6"
+         >
+          Account Details
+         </h2>
+
+         <div class="space-y-6">
+          <div>
+           <label
+            for="profileFullName"
+            class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+            >Full Name</label
+           >
+           <input
+            type="text"
+            id="profileFullName"
+            value="Admin User"
+            class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+           />
+          </div>
+
+          <div>
+           <label
+            for="profileEmail"
+            class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+            >Email Address</label
+           >
+           <input
+            type="email"
+            id="profileEmail"
+            value="admin@dost.gov.ph"
+            class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+           />
+          </div>
+
+          <div class="pt-4 border-t border-[#7c868a]/25">
+           <h3
+            class="font-inter text-xs tracking-[0.2em] uppercase text-[#002735] dark:text-[#ebf5f8] mb-4"
+           >
+            Change Password
+           </h3>
+           <div class="space-y-4">
+            <div>
+             <label
+              for="currentPassword"
+              class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+              >Current Password</label
+             >
+             <input
+              type="password"
+              id="currentPassword"
+              class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+             />
+            </div>
+            <div>
+             <label
+              for="newPassword"
+              class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+              >New Password</label
+             >
+             <input
+              type="password"
+              id="newPassword"
+              class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+             />
+            </div>
+            <div>
+             <label
+              for="confirmPassword"
+              class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+              >Confirm New Password</label
+             >
+             <input
+              type="password"
+              id="confirmPassword"
+              class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors"
+             />
+            </div>
+            <p id="passwordMsg" class="font-serif text-xs h-4"></p>
+            <button
+             type="button"
+             id="updatePasswordBtn"
+             class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2.5 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+            >
+             Update Password
+            </button>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </section>
+     </main>
+    </div>
+   </div>
+  </div>
+
+  <div
+   id="cameraModal"
+   class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0b1214]/80 backdrop-blur-sm px-4"
+  >
+   <div
+    class="w-full max-w-2xl bg-white dark:bg-[#002735] border border-[#7c868a]/30"
+   >
+    <div
+     class="border-b border-[#7c868a]/25 px-6 py-4 flex items-center justify-between"
+    >
+     <div>
+      <p
+       class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-1"
+      >
+       Scan QR
+      </p>
+      <h2
+       class="font-inter text-lg font-medium text-[#002735] dark:text-[#ebf5f8]"
+      >
+       Camera Scanner
+      </h2>
+     </div>
+     <button
+      type="button"
+      id="closeCameraModal"
+      class="text-[#7c868a] hover:text-[#002735] dark:hover:text-[#ebf5f8] transition-colors cursor-pointer"
+      aria-label="Close scanner"
+     >
+      <svg
+       class="w-5 h-5"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="1.5"
+       aria-hidden="true"
+      >
+       <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+      </svg>
+     </button>
+    </div>
+    <div class="p-6">
+     <div
+      class="bg-[#0b1214] aspect-video flex items-center justify-center relative"
+     >
+      <div class="text-center">
+       <svg
+        class="w-16 h-16 mx-auto text-[#00adec]/50 mb-3"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1"
+        aria-hidden="true"
+       >
+        <path
+         d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"
+         stroke-linecap="round"
+        />
+       </svg>
+       <p class="font-inter text-xs tracking-widest uppercase text-[#7c868a]">
+        Camera Preview
+       </p>
+      </div>
+      <div
+       class="absolute inset-12 border-2 border-[#00adec]/50 pointer-events-none"
+      >
+       <span
+        class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#00adec]"
+       ></span>
+       <span
+        class="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#00adec]"
+       ></span>
+       <span
+        class="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-[#00adec]"
+       ></span>
+       <span
+        class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[#00adec]"
+       ></span>
+      </div>
+     </div>
+     <p
+      class="font-serif text-sm text-[#35393a] dark:text-[#ebf5f8]/80 mt-4 text-center"
+     >
+      Position the QR code within the frame to confirm attendance.
+     </p>
+    </div>
+   </div>
+  </div>
+
+  <div
+   id="attendeeModal"
+   class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0b1214]/80 backdrop-blur-sm px-4 py-8 overflow-y-auto"
+  >
+   <div
+    class="w-full max-w-2xl bg-white dark:bg-[#002735] border border-[#7c868a]/30 my-auto"
+   >
+    <div
+     class="border-b border-[#7c868a]/25 px-6 py-4 flex items-center justify-between"
+    >
+     <div>
+      <p
+       class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-1"
+       id="attendeeModalLabel"
+      >
+       Attendee
+      </p>
+      <h2
+       id="attendeeModalTitle"
+       class="font-inter text-lg font-medium text-[#002735] dark:text-[#ebf5f8]"
+      >
+       Add Attendee
+      </h2>
+     </div>
+     <button
+      type="button"
+      id="closeAttendeeModal"
+      class="text-[#7c868a] hover:text-[#002735] dark:hover:text-[#ebf5f8] transition-colors cursor-pointer"
+      aria-label="Close"
+     >
+      <svg
+       class="w-5 h-5"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="1.5"
+       aria-hidden="true"
+      >
+       <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+      </svg>
+     </button>
+    </div>
+    <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto scroll-thin">
+     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div>
+       <label
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >First Name</label
+       >
+       <input
+        type="text"
+        id="mFirstName"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+       />
+      </div>
+      <div>
+       <label
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Middle Name</label
+       >
+       <input
+        type="text"
+        id="mMiddleName"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+       />
+      </div>
+      <div>
+       <label
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Last Name</label
+       >
+       <input
+        type="text"
+        id="mLastName"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+       />
+      </div>
+     </div>
+     <div>
+      <label
+       class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+       >Email</label
+      >
+      <input
+       type="email"
+       id="mEmail"
+       class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+      />
+     </div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+       <label
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Gender</label
+       >
+       <select
+        id="mGender"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+       >
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other / Prefer not to say</option>
+       </select>
+      </div>
+      <div>
+       <label
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Age Range</label
+       >
+       <select
+        id="mAge"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+       >
+        <option value="1-14">1–14</option>
+        <option value="15-30">15–30</option>
+        <option value="31-59">31–59</option>
+        <option value="60+">60+</option>
+       </select>
+      </div>
+     </div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+       <label
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Classification</label
+       >
+       <select
+        id="mClassification"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+       >
+        <option value="Student / Academe">Student / Academe</option>
+        <option value="Government Employee">Government Employee</option>
+        <option value="Business / Entrepreneur">Business / Entrepreneur</option>
+        <option value="Private Organization">Private Organization</option>
+        <option value="Homemaker">Homemaker</option>
+        <option value="Media">Media</option>
+        <option value="Others">Others</option>
+       </select>
+      </div>
+      <div>
+       <label
+        class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+        >Visitor Type</label
+       >
+       <select
+        id="mVisitorType"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+       >
+        <option value="Participant / Walk-in">Participant / Walk-in</option>
+        <option value="Exhibitor">Exhibitor</option>
+        <option value="Organizer / Facilitator">Organizer / Facilitator</option>
+        <option value="Speaker">Speaker</option>
+        <option value="Volunteer">Volunteer</option>
+       </select>
+      </div>
+     </div>
+     <div>
+      <label
+       class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+       >Affiliation</label
+      >
+      <input
+       type="text"
+       id="mAffiliation"
+       class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+      />
+     </div>
+     <div>
+      <label
+       class="font-inter block text-[10px] tracking-[0.2em] uppercase text-[#35393a] dark:text-[#ebf5f8]/80 mb-2"
+       >Region</label
+      >
+      <input
+       type="text"
+       id="mRegion"
+       class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-sm text-[#0b1214] dark:text-[#ebf5f8] focus:outline-none focus:border-[#00adec] transition-colors"
+      />
+     </div>
+    </div>
+    <div
+     class="border-t border-[#7c868a]/25 px-6 py-4 flex flex-col sm:flex-row justify-end gap-3"
+    >
+     <button
+      type="button"
+      id="cancelAttendeeBtn"
+      class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#35393a] dark:text-[#ebf5f8] border border-[#7c868a]/40 px-4 py-2.5 hover:border-[#35393a] transition-colors cursor-pointer"
+     >
+      Cancel
+     </button>
+     <button
+      type="button"
+      id="saveAttendeeBtn"
+      class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2.5 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+     >
+      Save
+     </button>
+    </div>
+   </div>
+  </div>
+
+  <div
+   id="confirmModal"
+   class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0b1214]/80 backdrop-blur-sm px-4"
+  >
+   <div
+    class="w-full max-w-md bg-white dark:bg-[#002735] border border-[#7c868a]/30 p-6"
+   >
+    <p
+     class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2"
+     id="confirmLabel"
+    >
+     Confirm
+    </p>
+    <h2
+     id="confirmTitle"
+     class="font-inter text-lg font-medium text-[#002735] dark:text-[#ebf5f8] mb-2"
+    >
+     Are you sure?
+    </h2>
+    <p
+     id="confirmMessage"
+     class="font-serif text-sm text-[#35393a] dark:text-[#ebf5f8]/80 mb-6"
+    >
+     This action cannot be undone.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-end gap-3">
+     <button
+      type="button"
+      id="confirmCancelBtn"
+      class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#35393a] dark:text-[#ebf5f8] border border-[#7c868a]/40 px-4 py-2.5 hover:border-[#35393a] transition-colors cursor-pointer"
+     >
+      Cancel
+     </button>
+     <button
+      type="button"
+      id="confirmOkBtn"
+      class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2.5 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+     >
+      Confirm
+     </button>
+    </div>
+   </div>
+  </div>
+
+  <div
+   id="certModal"
+   class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0b1214]/90 backdrop-blur-sm px-4 py-8 overflow-y-auto"
+  >
+   <div class="my-auto flex flex-col items-center gap-4">
+    <div class="flex items-center gap-3">
+     <button
+      type="button"
+      id="certCloseBtn"
+      class="font-inter text-[10px] tracking-[0.25em] uppercase text-white border border-white/40 px-4 py-2 hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer"
+     >
+      Close
+     </button>
+     <button
+      type="button"
+      id="certPrintBtn"
+      class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer"
+     >
+      Print
+     </button>
+    </div>
+    <div id="certModalContent" class="bg-white shadow-2xl"></div>
+   </div>
+  </div>
+
+  <div id="certPrintArea" class="hidden"></div>
+  <script src="/src/js/admin.js"></script>
+ </body>
+</html>

@@ -1,0 +1,17 @@
+@keyframes shimmer-pingpong {
+ 0% {
+  transform: translateX(-100%);
+ }
+ 100% {
+  transform: translateX(100%);
+ }
+}
+
+@keyframes pingpong {
+ 0% {
+  left: -20%;
+ }
+ 100% {
+  left: 80%;
+ }
+}
