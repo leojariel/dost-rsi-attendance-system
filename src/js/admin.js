@@ -724,7 +724,7 @@
   if (!attendee) return;
   certModalContent.innerHTML = certificateHTML(attendee);
   certModalContent.style.transform = "scale(0.55)";
-  certModalContent.style.transformOrigin = "top center";
+  certModalContent.style.transformOrigin = "center center";
   certModal.classList.remove("hidden");
   certModal.classList.add("flex");
  });
