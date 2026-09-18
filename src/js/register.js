@@ -74,17 +74,107 @@
  form.addEventListener("input", updateProgress);
  form.addEventListener("change", updateProgress);
 
- form.addEventListener("submit", function (e) {
+ function collectFormData() {
+  const fd = new FormData(form);
+  const ageRange = form.querySelector('input[name="ageRange"]:checked');
+  const visitorType = form.querySelector('input[name="visitorType"]:checked');
+
+  return {
+   privacyConsent: document.getElementById("privacyConsent").checked,
+   firstName: (fd.get("firstName") || "").toString().trim(),
+   middleName: (fd.get("middleName") || "").toString().trim(),
+   lastName: (fd.get("lastName") || "").toString().trim(),
+   gender: (fd.get("gender") || "").toString(),
+   ageRange: ageRange ? ageRange.value : "",
+   classification: (fd.get("classification") || "").toString(),
+   contactEmail: (fd.get("contactEmail") || "").toString().trim(),
+   visitorType: visitorType ? visitorType.value : "",
+   affiliation: (fd.get("affiliation") || "").toString().trim(),
+   region: (fd.get("region") || "").toString(),
+  };
+ }
+
+ function clearErrors() {
+  document.querySelectorAll(".error-msg").forEach((el) => {
+   el.textContent = "";
+   el.classList.remove("visible");
+  });
+  document.querySelectorAll(".field-error").forEach((el) => {
+   el.classList.remove("field-error");
+  });
+ }
+
+ function showErrors(errors) {
+  Object.entries(errors).forEach(([field, message]) => {
+   const msg = document.querySelector(`.error-msg[data-error-for="${field}"]`);
+   if (msg) {
+    msg.textContent = message;
+    msg.classList.add("visible");
+   }
+
+   const el =
+    document.getElementById(field) ||
+    document.querySelector(`input[name="${field}"]`);
+
+   if (el) {
+    el.classList.add("field-error");
+    el.setAttribute("aria-invalid", "true");
+    el.setAttribute("aria-describedby", `error-${field}`);
+    if (msg) msg.id = `error-${field}`;
+   }
+
+   if (field === "ageRange" || field === "visitorType") {
+    document.querySelectorAll(`input[name="${field}"]`).forEach((r) => {
+     r.classList.add("field-error");
+     r.setAttribute("aria-invalid", "true");
+    });
+   }
+  });
+
+  const firstKey = Object.keys(errors)[0];
+  const firstEl =
+   document.getElementById(firstKey) ||
+   document.querySelector(`input[name="${firstKey}"]`);
+  if (firstEl && typeof firstEl.focus === "function") {
+   firstEl.focus({preventScroll: false});
+   firstEl.scrollIntoView({behavior: "smooth", block: "center"});
+  }
+ }
+
+ form.addEventListener("submit", async function (e) {
   e.preventDefault();
   if (continueBtn.disabled) return;
 
-  const email = document.getElementById("contactEmail");
-  if (email && !email.checkValidity()) {
-   email.reportValidity();
-   return;
-  }
+  clearErrors();
+  continueBtn.disabled = true;
 
-  openModal();
+  const originalLabel = continueBtn.querySelector("span").textContent;
+  continueBtn.querySelector("span").textContent = "Validating...";
+
+  try {
+   const res = await fetch("../public/api/validate.php", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(collectFormData()),
+   });
+   const data = await res.json();
+
+   if (!data.ok) {
+    showErrors(data.errors || {error: "Validation failed."});
+    continueBtn.disabled = false;
+    continueBtn.querySelector("span").textContent = originalLabel;
+    return;
+   }
+
+   continueBtn.disabled = false;
+   continueBtn.querySelector("span").textContent = originalLabel;
+   openModal();
+  } catch (err) {
+   console.error(err);
+   continueBtn.disabled = false;
+   continueBtn.querySelector("span").textContent = originalLabel;
+   alert("Network error. Please try again.");
+  }
  });
 
  let ctx = null;
@@ -104,8 +194,7 @@
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
   ctx.strokeStyle = "#002735";
-  ctx.fillStyle = "#ebf5f8";
-  ctx.fillRect(0, 0, rect.width, rect.height);
+  ctx.clearRect(0, 0, rect.width, rect.height);
  }
 
  function getPos(e) {
@@ -150,8 +239,7 @@
  function clearCanvas() {
   if (!ctx) return;
   const rect = canvas.getBoundingClientRect();
-  ctx.fillStyle = "#ebf5f8";
-  ctx.fillRect(0, 0, rect.width, rect.height);
+  ctx.clearRect(0, 0, rect.width, rect.height);
   hasSignature = false;
   confirmBtn.disabled = true;
   signatureStatus.textContent = "Awaiting signature";
@@ -188,10 +276,49 @@
  clearBtn.addEventListener("click", clearCanvas);
  cancelBtn.addEventListener("click", closeModal);
  closeModalIcon.addEventListener("click", closeModal);
- confirmBtn.addEventListener("click", function () {
+
+ confirmBtn.addEventListener("click", async function () {
   if (!hasSignature) return;
-  closeModal();
-  alert("Registration submitted successfully.");
+
+  const signatureDataUrl = canvas.toDataURL("image/png");
+  const payload = Object.assign(collectFormData(), {
+   signature: signatureDataUrl,
+  });
+
+  const originalLabel = confirmBtn.textContent;
+  confirmBtn.disabled = true;
+  confirmBtn.textContent = "Submitting...";
+
+  try {
+   const res = await fetch("../public/api/register.php", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload),
+   });
+
+   const data = await res.json();
+
+   if (!data.ok) {
+    if (data.errors) {
+     closeModal();
+     showErrors(data.errors);
+    } else {
+     alert(data.error || "Registration failed.");
+    }
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = originalLabel;
+    return;
+   }
+
+   closeModal();
+   document.body.style.overflow = "";
+   showSuccessMessage(data.uuid);
+  } catch (err) {
+   console.error("Submit failed:", err);
+   alert("Submit failed: " + (err && err.message ? err.message : String(err)));
+   confirmBtn.disabled = false;
+   confirmBtn.textContent = originalLabel;
+  }
  });
 
  document.addEventListener("keydown", function (e) {
@@ -210,6 +337,42 @@
    img.src = existing;
   }
  });
+
+ function showSuccessMessage(uuid) {
+  const existing = document.getElementById("rsiSuccessOverlay");
+  if (existing) existing.remove();
+
+  const overlay = document.createElement("div");
+  overlay.id = "rsiSuccessOverlay";
+  overlay.className =
+   "fixed inset-0 z-[9999] flex items-center justify-center bg-[#0b1214]/85 backdrop-blur-sm px-4";
+  overlay.innerHTML = `
+      <div class="w-full max-w-md bg-white border border-[#7c868a]/30 p-8 text-center">
+        <p class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-3">Registration Complete</p>
+        <h2 class="font-inter text-2xl font-light text-[#002735] mb-3">You're on the list.</h2>
+        <p class="font-serif text-sm text-[#35393a] leading-relaxed mb-5">
+          A QR pass will be sent to your registered email. Present it at the entrance on event day.
+        </p>
+        <p class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] mb-6">
+          Reference: ${uuid}
+        </p>
+        <button type="button" id="successClose"
+          class="w-full bg-[#00adec] text-white font-inter font-medium text-[10px] tracking-[0.25em] uppercase py-3 px-4 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors">
+          Close
+        </button>
+      </div>
+    `;
+
+  document.body.appendChild(overlay);
+
+  const btn = overlay.querySelector("#successClose");
+  if (!btn) return;
+  btn.addEventListener("click", function (e) {
+   e.preventDefault();
+   e.stopPropagation();
+   overlay.remove();
+  });
+ }
 
  updateProgress();
 })();

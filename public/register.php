@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Register — 8th Research, Statistics, and Innovation Forum</title>
+ <link rel="stylesheet" href="./css/output.css" />
+ <link rel="preconnect" href="https://fonts.googleapis.com" />
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+ <link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+  rel="stylesheet" />
+ <style>
+  .font-inter {
+   font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  }
+
+  .font-serif {
+   font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  }
+
+  html {
+   font-size: 16px;
+  }
+
+  .grid-paper {
+   background-image:
+    linear-gradient(rgba(0, 91, 123, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 91, 123, 0.06) 1px, transparent 1px);
+   background-size: 32px 32px;
+  }
+
+  .field-error {
+   border-color: #00adec !important;
+  }
+
+  .error-msg {
+   font-family: "Inter", system-ui, sans-serif;
+   font-size: 11px;
+   letter-spacing: 0.05em;
+   color: #00adec;
+   margin-top: 4px;
+   display: none;
+  }
+
+  .error-msg.visible {
+   display: block;
+  }
+ </style>
+</head>
+
+<body class="antialiased bg-white text-[#0b1214] font-serif">
+ <header class="font-inter w-full border-b border-[#7c868a]/20 bg-white">
+  <div
+   class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
+   <a href="./index.html" class="flex items-center gap-2 text-[#002735]">
+    <svg
+     class="w-6 h-6"
+     viewBox="0 0 24 24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.5"
+     aria-hidden="true">
+     <path d="M12 3l9 6-9 6-9-6 9-6Z" stroke-linejoin="round" />
+     <path d="M3 15l9 6 9-6" stroke-linejoin="round" />
+    </svg>
+    <span class="font-medium tracking-wide text-sm uppercase">DOST · 8th RSI Forum</span>
+   </a>
+   <nav
+    class="flex items-center gap-6 text-xs uppercase tracking-widest text-[#35393a]">
+    <a href="index.php" class="hover:text-[#00adec] transition-colors">About</a>
+    <a href="#" class="text-[#00adec]" aria-current="page">Register</a>
+   </nav>
+  </div>
+ </header>
+
+ <section
+  class="relative w-full bg-cover bg-center bg-no-repeat"
+  style="
+    background-image:
+     linear-gradient(
+      to bottom,
+      rgba(0, 39, 53, 0.45) 0%,
+      rgba(0, 39, 53, 0.72) 55%,
+      #002735 100%
+     ),
+     url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJhIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgxMCkiPjxwYXRoIGQ9Ik0wIDBMNjAgNjBNNjAgMEwwIDYwIiBzdHJva2U9IiMwMGFkZWMiIHN0cm9rZS13aWR0aD0iMC40IiBvcGFjaXR5PSIwLjE1Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDAyNzM1Ii8+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==&quot;);
+   "
+  aria-labelledby="page-heading">
+  <div
+   class="relative max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+   <div class="lg:col-span-8">
+    <p
+     class="font-inter text-xs tracking-[0.3em] text-[#00adec] uppercase mb-4">
+     Registration Portal
+    </p>
+    <h1
+     id="page-heading"
+     class="font-inter text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-[#ebf5f8] leading-[1.05]">
+     8th Research,<br />
+     Statistic, and<br />
+     Innovation Forum
+    </h1>
+    <p
+     class="font-serif mt-6 text-[#ebf5f8]/80 max-w-xl text-base md:text-lg leading-relaxed">
+     Siensya, Teknolohiya, at Inobasyon: Kabalikat sa Matatag at Panatag na
+     Kinabukasan.
+    </p>
+   </div>
+
+   <div class="lg:col-span-4 lg:border-l lg:border-[#00adec]/40 lg:pl-8">
+    <dl
+     class="font-inter text-xs uppercase tracking-widest text-[#ebf5f8]/70 space-y-4">
+     <div>
+      <dt class="text-[#00adec] mb-1">Dates</dt>
+      <dd
+       class="font-serif text-sm text-[#ebf5f8] normal-case tracking-normal">
+       Oct 12 – 14, 2026<br />08:00 AM – 05:00 PM
+      </dd>
+     </div>
+     <div>
+      <dt class="text-[#00adec] mb-1">Venue</dt>
+      <dd
+       class="font-serif text-sm text-[#ebf5f8] normal-case tracking-normal">
+       Quezon Convention Center<br />Lucena City, Quezon
+      </dd>
+     </div>
+     <div>
+      <dt class="text-[#00adec] mb-1">Format</dt>
+      <dd
+       class="font-serif text-sm text-[#ebf5f8] normal-case tracking-normal">
+       Hybrid · In-Person &amp; Online
+      </dd>
+     </div>
+    </dl>
+   </div>
+  </div>
+ </section>
+
+ <div
+  class="w-full bg-white border-b border-[#7c868a]/20 sticky top-0 z-30"
+  role="region"
+  aria-label="Registration progress">
+  <div class="max-w-7xl mx-auto px-4 md:px-8 py-4">
+   <div class="flex items-center gap-6">
+    <div class="flex items-center gap-3 shrink-0">
+     <span
+      class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a]">Progress</span>
+     <span
+      id="progressValue"
+      class="font-inter text-sm font-medium text-[#002735]"
+      aria-live="polite">0 / 10</span>
+    </div>
+    <div
+     class="flex-1 h-px bg-[#7c868a]/25 relative"
+     role="progressbar"
+     aria-labelledby="progressLabel"
+     aria-valuemin="0"
+     aria-valuemax="10"
+     aria-valuenow="0"
+     id="progressBar">
+     <span id="progressLabel" class="sr-only">Form completion progress</span>
+     <div
+      class="absolute top-0 left-0 h-px bg-[#00adec] transition-all duration-500"
+      id="progressFill"
+      style="width: 0%"></div>
+     <div
+      class="absolute -top-[3px] w-1.5 h-1.5 bg-[#00adec] transition-all duration-500"
+      id="progressDot"
+      style="left: 0%"></div>
+    </div>
+    <span
+     id="progressStatus"
+     class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] shrink-0">Incomplete</span>
+   </div>
+  </div>
+ </div>
+
+ <main class="w-full bg-white grid-paper">
+  <form id="registrationForm" novalidate onsubmit="return false" class="max-w-7xl mx-auto px-4 md:px-8 py-16">
+   <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <aside class="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
+     <div class="border-l-2 border-[#00adec] pl-6">
+      <p
+       class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-3">
+       Section 01
+      </p>
+      <h2
+       class="font-inter text-2xl font-light text-[#002735] leading-snug mb-4">
+       Data Privacy<br />Consent
+      </h2>
+      <p class="font-serif text-sm text-[#35393a] leading-relaxed mb-4">
+       DOST CALABARZON collects and processes the personal information you
+       provide below solely for event registration, coordination, and reporting
+       purposes, in accordance with the Data Privacy Act of 2012 (RA 10173).
+      </p>
+      <p class="font-serif text-xs text-[#7c868a] leading-relaxed italic mb-6">
+       Kinokolekta at pinoproseso ng DOST CALABARZON ang personal na
+       impormasyong ibibigay mo sa ibaba, para lamang sa layunin ng
+       pagpaparehistro, koordinasyon, at pag-uulat ng mga kaganapan, alinsunod
+       sa Data Privacy Act of 2012 (RA 10173).
+      </p>
+
+      <label class="flex items-start gap-3 cursor-pointer group">
+       <span class="relative flex items-center justify-center mt-0.5">
+        <input
+         type="checkbox"
+         id="privacyConsent"
+         name="privacyConsent"
+         required
+         aria-required="true"
+         aria-describedby="privacy-help"
+         class="sr-only peer" />
+        <span
+         class="w-5 h-5 border border-[#7c868a] peer-checked:bg-[#00adec] peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors flex items-center justify-center">
+         <svg
+          class="w-3 h-3 text-white hidden peer-checked:block"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          aria-hidden="true">
+          <path
+           d="M5 12l5 5L20 7"
+           stroke-linecap="round"
+           stroke-linejoin="round" />
+         </svg>
+        </span>
+       </span>
+       <span
+        id="privacy-help"
+        class="font-serif text-sm text-[#0b1214] leading-relaxed">
+        I have read and agree to the collection and processing of my personal
+        data as described above.
+        <span class="block text-[#7c868a] italic mt-1 text-xs">
+         Nabasa ko at sumasang-ayon ako sa pagkolekta at pagproseso ng aking
+         personal na impormasyon gaya ng nasa itaas.
+        </span>
+        <p class="error-msg" data-error-for="privacyConsent"></p>
+       </span>
+      </label>
+     </div>
+    </aside>
+
+    <div class="lg:col-span-8 space-y-16">
+     <section aria-labelledby="personal-heading">
+      <div
+       class="flex items-baseline justify-between border-b border-[#7c868a]/25 pb-4 mb-8">
+       <div>
+        <p
+         class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2">
+         Section 02
+        </p>
+        <h2
+         id="personal-heading"
+         class="font-inter text-2xl font-light text-[#002735]">
+         Your Information
+        </h2>
+        <p class="font-serif text-xs text-[#7c868a] italic mt-1">
+         Iyong Impormasyon
+        </p>
+       </div>
+       <span
+        class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] hidden sm:block">Required</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-8">
+       <div class="md:col-span-4">
+        <label
+         for="firstName"
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+         First Name <span class="text-[#00adec]" aria-hidden="true">*</span>
+        </label>
+        <input
+         type="text"
+         id="firstName"
+         name="firstName"
+         required
+         aria-required="true"
+         autocomplete="given-name"
+         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+        <p class="error-msg" data-error-for="firstName"></p>
+       </div>
+       <div class="md:col-span-4">
+        <label
+         for="middleName"
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+         Middle Name
+        </label>
+        <input
+         type="text"
+         id="middleName"
+         name="middleName"
+         autocomplete="additional-name"
+         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+        <p class="error-msg" data-error-for="middleName"></p>
+       </div>
+       <div class="md:col-span-4">
+        <label
+         for="lastName"
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+         Last Name <span class="text-[#00adec]" aria-hidden="true">*</span>
+        </label>
+        <input
+         type="text"
+         id="lastName"
+         name="lastName"
+         required
+         aria-required="true"
+         autocomplete="family-name"
+         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+        <p class="error-msg" data-error-for="lastName"></p>
+       </div>
+
+       <div class="md:col-span-6">
+        <label
+         for="gender"
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+         Gender <span class="text-[#00adec]" aria-hidden="true">*</span>
+        </label>
+        <select
+         id="gender"
+         name="gender"
+         required
+         aria-required="true"
+         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
+         style="
+           background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3Yzg2OGEiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTYgOWw2IDYgNi02IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=&quot;);
+           background-repeat: no-repeat;
+           background-position: right 0 center;
+           padding-right: 1.5rem;
+          ">
+         <option value="" disabled selected>Select...</option>
+         <option class="p-3" value="male">Male</option>
+         <option value="female">Female</option>
+         <option value="other">Other / Prefer not to say</option>
+        </select>
+        <p class="error-msg" data-error-for="gender"></p>
+       </div>
+
+       <div class="md:col-span-6">
+        <label
+         for="classification"
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+         Classification
+         <span class="text-[#00adec]" aria-hidden="true">*</span>
+        </label>
+        <select
+         id="classification"
+         name="classification"
+         required
+         aria-required="true"
+         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
+         style="
+           background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3Yzg2OGEiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTYgOWw2IDYgNi02IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=&quot;);
+           background-repeat: no-repeat;
+           background-position: right 0 center;
+           padding-right: 1.5rem;
+          ">
+         <option value="" disabled selected>Select...</option>
+         <option value="business">Business / Entrepreneur</option>
+         <option value="government">Government Employee</option>
+         <option value="homemaker">Homemaker</option>
+         <option value="media">Media</option>
+         <option value="others">Others</option>
+         <option value="private">Private Organization</option>
+         <option value="student">Student / Academe</option>
+        </select>
+        <p class="error-msg" data-error-for="classification"></p>
+       </div>
+
+       <fieldset class="md:col-span-12" aria-describedby="ageHelp">
+        <legend
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-3">
+         Age Range <span class="text-[#00adec]" aria-hidden="true">*</span>
+         <span id="ageHelp" class="sr-only">Select one age range</span>
+        </legend>
+        <div
+         class="grid grid-cols-2 sm:grid-cols-4 gap-3"
+         role="radiogroup"
+         aria-label="Age Range">
+         <label class="cursor-pointer">
+          <input
+           type="radio"
+           name="ageRange"
+           value="1-14"
+           required
+           class="sr-only peer" />
+          <span
+           class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">1–14</span>
+         </label>
+         <label class="cursor-pointer">
+          <input
+           type="radio"
+           name="ageRange"
+           value="15-30"
+           required
+           class="sr-only peer" />
+          <span
+           class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">15–30</span>
+         </label>
+         <label class="cursor-pointer">
+          <input
+           type="radio"
+           name="ageRange"
+           value="31-59"
+           required
+           class="sr-only peer" />
+          <span
+           class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">31–59</span>
+         </label>
+         <label class="cursor-pointer">
+          <input
+           type="radio"
+           name="ageRange"
+           value="60+"
+           required
+           class="sr-only peer" />
+          <span
+           class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">60+</span>
+         </label>
+         <p class="error-msg" data-error-for="ageRange"></p>
+        </div>
+       </fieldset>
+      </div>
+     </section>
+
+     <section aria-labelledby="contact-heading">
+      <div
+       class="flex items-baseline justify-between border-b border-[#7c868a]/25 pb-4 mb-8">
+       <div>
+        <p
+         class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2">
+         Section 03
+        </p>
+        <h2
+         id="contact-heading"
+         class="font-inter text-2xl font-light text-[#002735]">
+         Registration Info
+        </h2>
+        <p class="font-serif text-xs text-[#7c868a] italic mt-1">
+         Impormasyon sa Pagpaparehistro
+        </p>
+       </div>
+      </div>
+
+      <div>
+       <label
+        for="contactEmail"
+        class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+        Contact Email <span class="text-[#00adec]" aria-hidden="true">*</span>
+       </label>
+       <input
+        type="email"
+        id="contactEmail"
+        name="contactEmail"
+        required
+        aria-required="true"
+        autocomplete="email"
+        placeholder="juan@example.com"
+        class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] placeholder:text-[#7c868a]/60 focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+       <p class="error-msg" data-error-for="contactEmail"></p>
+       <p class="font-serif text-xs text-[#7c868a] mt-2">
+        We will send your event pass and updates to this address.
+       </p>
+      </div>
+     </section>
+
+     <section aria-labelledby="visitor-heading">
+      <div
+       class="flex items-baseline justify-between border-b border-[#7c868a]/25 pb-4 mb-8">
+       <div>
+        <p
+         class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2">
+         Section 04
+        </p>
+        <h2
+         id="visitor-heading"
+         class="font-inter text-2xl font-light text-[#002735]">
+         Visitor Profile
+        </h2>
+        <p class="font-serif text-xs text-[#7c868a] italic mt-1">
+         Profile ng Bisita
+        </p>
+       </div>
+      </div>
+
+      <fieldset aria-describedby="visitorHelp" class="mb-8">
+       <legend
+        class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-3">
+        Visitor Type <span class="text-[#00adec]" aria-hidden="true">*</span>
+       </legend>
+       <div
+        class="flex flex-wrap gap-2"
+        role="radiogroup"
+        aria-label="Visitor Type">
+        <label class="cursor-pointer">
+         <input
+          type="radio"
+          name="visitorType"
+          value="exhibitor"
+          required
+          class="sr-only peer" />
+         <span
+          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Exhibitor</span>
+        </label>
+        <label class="cursor-pointer">
+         <input
+          type="radio"
+          name="visitorType"
+          value="organizer"
+          required
+          class="sr-only peer" />
+         <span
+          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Organizer / Facilitator</span>
+        </label>
+        <label class="cursor-pointer">
+         <input
+          type="radio"
+          name="visitorType"
+          value="participant"
+          required
+          class="sr-only peer" />
+         <span
+          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Participant / Walk-in</span>
+        </label>
+        <label class="cursor-pointer">
+         <input
+          type="radio"
+          name="visitorType"
+          value="speaker"
+          required
+          class="sr-only peer" />
+         <span
+          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Speaker</span>
+        </label>
+        <label class="cursor-pointer">
+         <input
+          type="radio"
+          name="visitorType"
+          value="volunteer"
+          required
+          class="sr-only peer" />
+         <span
+          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Volunteer</span>
+        </label>
+        <p class="error-msg" data-error-for="visitorType"></p>
+       </div>
+      </fieldset>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+       <div>
+        <label
+         for="affiliation"
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+         Affiliation <span class="text-[#00adec]" aria-hidden="true">*</span>
+        </label>
+        <input
+         type="text"
+         id="affiliation"
+         name="affiliation"
+         required
+         aria-required="true"
+         placeholder="School / Company / Organization"
+         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] placeholder:text-[#7c868a]/60 focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+        <p class="error-msg" data-error-for="affiliation"></p>
+        <p class="font-serif text-xs text-[#7c868a] mt-2">
+         School, government agency, company, etc.
+        </p>
+       </div>
+       <div>
+        <label
+         for="region"
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+         Region <span class="text-[#00adec]" aria-hidden="true">*</span>
+        </label>
+        <select
+         id="region"
+         name="region"
+         required
+         aria-required="true"
+         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors appearance-none"
+         style="
+           background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3Yzg2OGEiIHN0cm9rZS13aWR0aD0iMiI+PHBhdGggZD0iTTYgOWw2IDYgNi02IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=&quot;);
+           background-repeat: no-repeat;
+           background-position: right 0 center;
+           padding-right: 1.5rem;
+          ">
+         <option value="" disabled selected>Select your region...</option>
+         <option value="17">BARMM (Bangsamoro)</option>
+         <option value="2">CAR (Cordillera Administrative Region)</option>
+         <option value="1">NCR (National Capital Region)</option>
+         <option value="3">Region I (Ilocos Region)</option>
+         <option value="4">Region II (Cagayan Valley)</option>
+         <option value="5">Region III (Central Luzon)</option>
+         <option value="6">Region IV-A (CALABARZON)</option>
+         <option value="7">Region IV-B (MIMAROPA)</option>
+         <option value="12">Region IX (Zamboanga Peninsula)</option>
+         <option value="8">Region V (Bicol Region)</option>
+         <option value="9">Region VI (Western Visayas)</option>
+         <option value="10">Region VII (Central Visayas)</option>
+         <option value="11">Region VIII (Eastern Visayas)</option>
+         <option value="13">Region X (Northern Mindanao)</option>
+         <option value="14">Region XI (Davao Region)</option>
+         <option value="15">Region XII (SOCCSKSARGEN)</option>
+         <option value="16">Region XIII (CARAGA)</option>
+        </select>
+        <p class="error-msg" data-error-for="region"></p>
+       </div>
+      </div>
+     </section>
+
+     <section aria-labelledby="activities-heading">
+      <div
+       class="flex items-baseline justify-between border-b border-[#7c868a]/25 pb-4 mb-8">
+       <div>
+        <p
+         class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-2">
+         Section 05
+        </p>
+        <h2
+         id="activities-heading"
+         class="font-inter text-2xl font-light text-[#002735]">
+         Select Activities
+        </h2>
+        <p class="font-serif text-xs text-[#7c868a] italic mt-1">
+         Pumili ng Mga Aktibidad — Optional
+        </p>
+       </div>
+      </div>
+
+      <div class="divide-y divide-[#7c868a]/20">
+       <label class="flex items-start gap-4 py-4 cursor-pointer group">
+        <span class="relative flex items-center justify-center mt-1 shrink-0">
+         <input
+          type="checkbox"
+          name="activities"
+          value="exhibit-tkime"
+          class="sr-only peer" />
+         <span
+          class="w-5 h-5 border border-[#7c868a] peer-checked:bg-[#00adec] peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors flex items-center justify-center">
+          <svg
+           class="w-3 h-3 text-white hidden peer-checked:block"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="3"
+           aria-hidden="true">
+           <path
+            d="M5 12l5 5L20 7"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          </svg>
+         </span>
+        </span>
+        <span class="flex-1">
+         <span
+          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">2026 Grand TKME Exhibit</span>
+         <span class="font-serif text-xs text-[#7c868a] block mt-1">Teknolohiya at Inobasyon, Kaagapay ng Micro Enterprises</span>
+         <span
+          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 12 · 08:00 AM · In-Person</span>
+        </span>
+       </label>
+
+       <label class="flex items-start gap-4 py-4 cursor-pointer group">
+        <span class="relative flex items-center justify-center mt-1 shrink-0">
+         <input
+          type="checkbox"
+          name="activities"
+          value="exhibit-st"
+          class="sr-only peer" />
+         <span
+          class="w-5 h-5 border border-[#7c868a] peer-checked:bg-[#00adec] peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors flex items-center justify-center">
+          <svg
+           class="w-3 h-3 text-white hidden peer-checked:block"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="3"
+           aria-hidden="true">
+           <path
+            d="M5 12l5 5L20 7"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          </svg>
+         </span>
+        </span>
+        <span class="flex-1">
+         <span
+          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">2026 S&amp;T Exhibit</span>
+         <span class="font-serif text-xs text-[#7c868a] block mt-1">Showcase of science and technology innovations</span>
+         <span
+          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 12 · 08:20 AM · In-Person</span>
+        </span>
+       </label>
+
+       <label class="flex items-start gap-4 py-4 cursor-pointer group">
+        <span class="relative flex items-center justify-center mt-1 shrink-0">
+         <input
+          type="checkbox"
+          name="activities"
+          value="plenary"
+          class="sr-only peer" />
+         <span
+          class="w-5 h-5 border border-[#7c868a] peer-checked:bg-[#00adec] peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors flex items-center justify-center">
+          <svg
+           class="w-3 h-3 text-white hidden peer-checked:block"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="3"
+           aria-hidden="true">
+           <path
+            d="M5 12l5 5L20 7"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          </svg>
+         </span>
+        </span>
+        <span class="flex-1">
+         <span
+          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Plenary Sessions</span>
+         <span class="font-serif text-xs text-[#7c868a] block mt-1">Keynote addresses from distinguished experts</span>
+         <span
+          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 13 · 09:00 AM · Main Hall</span>
+        </span>
+       </label>
+
+       <label class="flex items-start gap-4 py-4 cursor-pointer group">
+        <span class="relative flex items-center justify-center mt-1 shrink-0">
+         <input
+          type="checkbox"
+          name="activities"
+          value="innovation-pitch"
+          class="sr-only peer" />
+         <span
+          class="w-5 h-5 border border-[#7c868a] peer-checked:bg-[#00adec] peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors flex items-center justify-center">
+          <svg
+           class="w-3 h-3 text-white hidden peer-checked:block"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="3"
+           aria-hidden="true">
+           <path
+            d="M5 12l5 5L20 7"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+          </svg>
+         </span>
+        </span>
+        <span class="flex-1">
+         <span
+          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Innovation Pitch Competition</span>
+         <span class="font-serif text-xs text-[#7c868a] block mt-1">Competitive pitch sessions for innovative ideas</span>
+         <span
+          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 14 · 01:00 PM · Function Room A</span>
+        </span>
+       </label>
+      </div>
+     </section>
+
+     <div class="pt-4">
+      <button
+       type="submit"
+       id="continueBtn"
+       class="w-full inline-flex items-center justify-between gap-4 bg-[#002735] text-[#ebf5f8] font-inter font-medium text-xs tracking-[0.25em] uppercase py-5 px-6 border border-[#002735] hover:bg-[#00adec] hover:text-[#002735] hover:border-[#00adec] focus:outline-none focus:ring-2 focus:ring-[#00adec] focus:ring-offset-2 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#002735] disabled:hover:text-[#ebf5f8] disabled:hover:border-[#002735]"
+       disabled>
+       <span>Continue to E-Signature</span>
+       <svg
+        class="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true">
+        <path
+         d="M5 12h14M13 6l6 6-6 6"
+         stroke-linecap="round"
+         stroke-linejoin="round" />
+       </svg>
+      </button>
+     </div>
+    </div>
+   </div>
+  </form>
+ </main>
+
+ <footer class="w-full border-t border-[#7c868a]/20 bg-[#0b1214]">
+  <div
+   class="max-w-7xl mx-auto px-4 md:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-inter text-[10px] tracking-[0.25em] text-[#7c868a] uppercase">
+   <span>DOST CALABARZON</span>
+   <span>8th RSI Forum · 2026</span>
+  </div>
+ </footer>
+
+ <div
+  id="signatureModal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0b1214]/80 backdrop-blur-sm px-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="signatureHeading"
+  aria-describedby="signatureHelp">
+  <div class="w-full max-w-2xl bg-white border border-[#7c868a]/30">
+   <div
+    class="border-b border-[#7c868a]/25 px-6 md:px-8 py-5 flex items-center justify-between">
+    <div>
+     <p
+      class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#00adec] mb-1">
+      Section 06
+     </p>
+     <h2
+      id="signatureHeading"
+      class="font-inter text-lg font-medium text-[#002735]">
+      E-Signature
+     </h2>
+    </div>
+    <button
+     type="button"
+     id="closeModalIcon"
+     class="text-[#7c868a] hover:text-[#002735] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00adec] focus:ring-offset-2"
+     aria-label="Close dialog">
+     <svg
+      class="w-5 h-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+     </svg>
+    </button>
+   </div>
+
+   <div class="px-6 md:px-8 py-6">
+    <p id="signatureHelp" class="font-serif text-sm text-[#35393a] mb-1">
+     Sign in the box below to confirm your registration.
+    </p>
+    <p class="font-serif text-xs text-[#7c868a] italic mb-5">
+     Pumirma sa kahon sa ibaba upang kumpirmahin ang pagpaparehistro.
+    </p>
+    <p class="error-msg" data-error-for="signature"></p>
+
+    <div class="border border-[#7c868a]/40 bg-[#ebf5f8]/40 relative">
+     <canvas
+      id="signaturePad"
+      class="w-full block touch-none"
+      height="220"
+      role="img"
+      aria-label="Signature drawing area"></canvas>
+     <div
+      id="signaturePlaceholder"
+      class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <span
+       class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#7c868a]/50">Sign here</span>
+     </div>
+     <div
+      class="absolute bottom-3 left-4 right-4 border-b border-[#7c868a]/30"></div>
+    </div>
+
+    <div class="flex items-center justify-between mt-4 mb-6">
+     <button
+      type="button"
+      id="clearSignature"
+      class="font-inter text-[10px] tracking-[0.25em] uppercase text-[#35393a] border border-[#7c868a]/40 px-4 py-2 hover:border-[#00adec] hover:text-[#00adec] focus:outline-none focus:ring-2 focus:ring-[#00adec] focus:ring-offset-2 transition-colors">
+      Clear
+     </button>
+     <span
+      id="signatureStatus"
+      class="font-inter text-[10px] tracking-[0.2em] uppercase text-[#7c868a]"
+      aria-live="polite">Awaiting signature</span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3">
+     <button
+      type="button"
+      id="cancelSignature"
+      class="flex-1 font-inter text-[10px] tracking-[0.25em] uppercase text-[#35393a] border border-[#7c868a]/40 py-3 px-4 hover:border-[#35393a] focus:outline-none focus:ring-2 focus:ring-[#00adec] focus:ring-offset-2 transition-colors">
+      Cancel
+     </button>
+     <button
+      type="button"
+      id="confirmSignature"
+      class="flex-1 bg-[#00adec] text-[#002735] font-inter font-medium text-[10px] tracking-[0.25em] uppercase py-3 px-4 border border-[#00adec] hover:bg-[#005b7b] hover:text-[#ebf5f8] hover:border-[#005b7b] focus:outline-none focus:ring-2 focus:ring-[#00adec] focus:ring-offset-2 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#00adec] disabled:hover:text-[#002735] disabled:hover:border-[#00adec]"
+      disabled>
+      Register
+     </button>
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <script src="../src/js/register.js"></script>
+</body>
+
+</html>

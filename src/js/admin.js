@@ -23,6 +23,11 @@
 })();
 
 (function () {
+ const API = {
+  scan: "/dost-rsi-attendance-system/public/api/scan.php",
+  list: "/dost-rsi-attendance-system/public/api/list_attendees.php",
+ };
+
  const SUPER_ADMIN_PASSWORD = "thescript";
  const STORAGE_ADMINS = "rsi-admins";
 
@@ -117,210 +122,7 @@
  let sortDirection = "desc";
  let confirmCallback = null;
 
- const baseAttendees = [
-  {
-   id: "RSI-0001",
-   firstName: "Maria",
-   middleName: "Lopez",
-   lastName: "Santos",
-   gender: "Female",
-   age: "31-59",
-   classification: "Government Employee",
-   email: "maria.santos@dost.gov.ph",
-   visitorType: "Participant / Walk-in",
-   affiliation: "DOST CALABARZON",
-   region: "Region IV-A (CALABARZON)",
-   status: "confirmed",
-   confirmedAt: "2026-10-12 10:42",
-  },
-  {
-   id: "RSI-0002",
-   firstName: "Juan",
-   middleName: "Reyes",
-   lastName: "Dela Cruz",
-   gender: "Male",
-   age: "31-59",
-   classification: "Government Employee",
-   email: "juan.delacruz@dost.gov.ph",
-   visitorType: "Speaker",
-   affiliation: "DOST Central Office",
-   region: "NCR (National Capital Region)",
-   status: "confirmed",
-   confirmedAt: "2026-10-12 10:38",
-  },
-  {
-   id: "RSI-0003",
-   firstName: "Andres",
-   middleName: "",
-   lastName: "Bonifacio",
-   gender: "Male",
-   age: "31-59",
-   classification: "Business / Entrepreneur",
-   email: "andres.b@example.com",
-   visitorType: "Exhibitor",
-   affiliation: "Katipunan Enterprises",
-   region: "NCR (National Capital Region)",
-   status: "confirmed",
-   confirmedAt: "2026-10-12 10:31",
-  },
-  {
-   id: "RSI-0004",
-   firstName: "Jose",
-   middleName: "Protacio",
-   lastName: "Rizal",
-   gender: "Male",
-   age: "31-59",
-   classification: "Student / Academe",
-   email: "jose.rizal@example.com",
-   visitorType: "Volunteer",
-   affiliation: "University of the Philippines",
-   region: "Region IV-A (CALABARZON)",
-   status: "confirmed",
-   confirmedAt: "2026-10-12 10:22",
-  },
-  {
-   id: "RSI-0005",
-   firstName: "Gabriela",
-   middleName: "Silang",
-   lastName: "Apolinario",
-   gender: "Female",
-   age: "31-59",
-   classification: "Government Employee",
-   email: "gabriela.a@example.com",
-   visitorType: "Participant / Walk-in",
-   affiliation: "DOST CALABARZON",
-   region: "Region IV-A (CALABARZON)",
-   status: "confirmed",
-   confirmedAt: "2026-10-12 09:58",
-  },
-  {
-   id: "RSI-0006",
-   firstName: "Emilio",
-   middleName: "Famy",
-   lastName: "Aguinaldo",
-   gender: "Male",
-   age: "60+",
-   classification: "Government Employee",
-   email: "emilio.a@example.com",
-   visitorType: "Organizer / Facilitator",
-   affiliation: "DOST Central Office",
-   region: "NCR (National Capital Region)",
-   status: "confirmed",
-   confirmedAt: "2026-10-12 09:45",
-  },
-  {
-   id: "RSI-0007",
-   firstName: "Melchora",
-   middleName: "Aquino",
-   lastName: "Ramos",
-   gender: "Female",
-   age: "60+",
-   classification: "Homemaker",
-   email: "melchora.r@example.com",
-   visitorType: "Participant / Walk-in",
-   affiliation: "Community",
-   region: "Region IV-A (CALABARZON)",
-   status: "absent",
-   confirmedAt: "",
-  },
-  {
-   id: "RSI-0008",
-   firstName: "Apolinario",
-   middleName: "Dela Cruz",
-   lastName: "Mabini",
-   gender: "Male",
-   age: "31-59",
-   classification: "Student / Academe",
-   email: "apolinario.m@example.com",
-   visitorType: "Participant / Walk-in",
-   affiliation: "Batangas State University",
-   region: "Region IV-A (CALABARZON)",
-   status: "absent",
-   confirmedAt: "",
-  },
-  {
-   id: "RSI-0009",
-   firstName: "Marcelo",
-   middleName: "Hilario",
-   lastName: "Del Pilar",
-   gender: "Male",
-   age: "31-59",
-   classification: "Media",
-   email: "marcelo.d@example.com",
-   visitorType: "Participant / Walk-in",
-   affiliation: "Daily Tribune",
-   region: "NCR (National Capital Region)",
-   status: "absent",
-   confirmedAt: "",
-  },
-  {
-   id: "RSI-0010",
-   firstName: "Gregoria",
-   middleName: "de Jesus",
-   lastName: "Silang",
-   gender: "Female",
-   age: "31-59",
-   classification: "Business / Entrepreneur",
-   email: "gregoria.s@example.com",
-   visitorType: "Exhibitor",
-   affiliation: "Ilocos Crafts",
-   region: "Region I (Ilocos Region)",
-   status: "absent",
-   confirmedAt: "",
-  },
-  {
-   id: "RSI-0011",
-   firstName: "Lapu",
-   middleName: "",
-   lastName: "Lapu",
-   gender: "Male",
-   age: "31-59",
-   classification: "Others",
-   email: "lapu.lapu@example.com",
-   visitorType: "Volunteer",
-   affiliation: "Cebu Heritage",
-   region: "Region VII (Central Visayas)",
-   status: "absent",
-   confirmedAt: "",
-  },
-  {
-   id: "RSI-0012",
-   firstName: "Teresa",
-   middleName: "Magbanua",
-   lastName: "Ferraris",
-   gender: "Female",
-   age: "31-59",
-   classification: "Government Employee",
-   email: "teresa.f@example.com",
-   visitorType: "Participant / Walk-in",
-   affiliation: "DOST Region VI",
-   region: "Region VI (Western Visayas)",
-   status: "absent",
-   confirmedAt: "",
-  },
- ];
-
- const regionsList = [
-  "BARMM (Bangsamoro)",
-  "CAR (Cordillera Administrative Region)",
-  "NCR (National Capital Region)",
-  "Region I (Ilocos Region)",
-  "Region II (Cagayan Valley)",
-  "Region III (Central Luzon)",
-  "Region IV-A (CALABARZON)",
-  "Region IV-B (MIMAROPA)",
-  "Region V (Bicol Region)",
-  "Region VI (Western Visayas)",
-  "Region VII (Central Visayas)",
-  "Region VIII (Eastern Visayas)",
-  "Region IX (Zamboanga Peninsula)",
-  "Region X (Northern Mindanao)",
-  "Region XI (Davao Region)",
-  "Region XII (SOCCSKSARGEN)",
-  "Region XIII (CARAGA)",
- ];
-
- let attendees = JSON.parse(JSON.stringify(baseAttendees));
+ let attendees = [];
 
  function getAdmins() {
   try {
@@ -335,12 +137,16 @@
  }
 
  function initialsFrom(name) {
-  return name
+  return String(name || "")
    .split(/\s+/)
    .filter(Boolean)
    .slice(0, 2)
    .map((n) => n[0].toUpperCase())
    .join("");
+ }
+
+ function fullName(a) {
+  return [a.first_name, a.middle_name, a.last_name].filter(Boolean).join(" ");
  }
 
  superSubmit.addEventListener("click", function () {
@@ -410,7 +216,6 @@
   const name = loginName.value.trim();
   const pwd = loginPassword.value;
   const admins = getAdmins();
-
   const match = admins.find(
    (a) => a.name.toLowerCase() === name.toLowerCase() && a.password === pwd,
   );
@@ -438,8 +243,10 @@
   profileEmail.value =
    currentUser.name.toLowerCase().replace(/\s+/g, ".") + "@dost.gov.ph";
 
-  renderAll();
-  navigateTo("dashboard");
+  fetchAllAttendees().then(() => {
+   renderAll();
+   navigateTo("dashboard");
+  });
  }
 
  logoutBtn.addEventListener("click", function () {
@@ -491,77 +298,229 @@
    n.classList.toggle("bg-[#ebf5f8]/60", active);
    n.classList.toggle("dark:bg-[#0b1214]/60", active);
   });
-  if (pageId === "certificates") renderCertificates();
-  if (pageId === "scanner") renderConfirmedList();
+
+  if (pageId === "scanner") refreshConfirmedFromServer();
+  if (pageId === "attendees") fetchAllAttendees().then(renderAll);
+  if (pageId === "confirmed") fetchAllAttendees().then(renderAll);
+  if (pageId === "absent") fetchAllAttendees().then(renderAll);
+  if (pageId === "certificates") fetchAllAttendees().then(renderCertificates);
  }
 
- function formatTime() {
-  const d = new Date();
-  return d.toLocaleTimeString("en-PH", {
-   hour: "2-digit",
-   minute: "2-digit",
-   hour12: true,
-  });
+ async function fetchAllAttendees() {
+  try {
+   const res = await fetch(API.list + "?status=all");
+   const data = await res.json();
+   if (data.ok) attendees = data.attendees;
+  } catch (err) {
+   console.error("Fetch attendees error:", err);
+  }
  }
 
- function renderConfirmedList() {
-  const confirmed = attendees
-   .filter((a) => a.status === "confirmed")
-   .sort((a, b) => {
-    const dir = sortDirection === "asc" ? 1 : -1;
+ async function refreshConfirmedFromServer() {
+  try {
+   const res = await fetch(API.list + "?status=confirmed");
+   const data = await res.json();
+   if (!data.ok) return;
+
+   let list = data.attendees;
+
+   const dir = sortDirection === "asc" ? 1 : -1;
+   list = list.slice().sort((a, b) => {
     if (sortField.value === "firstName")
-     return a.firstName.localeCompare(b.firstName) * dir;
+     return a.first_name.localeCompare(b.first_name) * dir;
     if (sortField.value === "lastName")
-     return a.lastName.localeCompare(b.lastName) * dir;
-    return (a.confirmedAt || "").localeCompare(b.confirmedAt || "") * dir;
+     return a.last_name.localeCompare(b.last_name) * dir;
+    return (a.confirmed_at || "").localeCompare(b.confirmed_at || "") * dir;
    });
 
-  const container = confirmedList.querySelector("div");
-  container.innerHTML = confirmed
-   .map(
-    (a) => `
-      <div class="px-5 py-3 flex items-center gap-3">
-        <span class="gradient-avatar w-8 h-8 rounded-full flex items-center justify-center text-[#ebf5f8] font-inter text-[10px] font-medium shrink-0">
-          ${initialsFrom(a.firstName + " " + a.lastName)}
-        </span>
-        <div class="flex-1 min-w-0">
-          <p class="font-inter text-sm text-[#002735] dark:text-[#ebf5f8] truncate">${a.firstName} ${a.lastName}</p>
-          <p class="font-serif text-[11px] text-[#7c868a]">${a.gender} · ${a.age} · ${a.confirmedAt || ""}</p>
+   const container = confirmedList.querySelector("div");
+   container.innerHTML = list
+    .map(
+     (a) => `
+        <div class="px-5 py-3 flex items-center gap-3">
+          <span class="gradient-avatar w-8 h-8 rounded-full flex items-center justify-center text-[#ebf5f8] font-inter text-[10px] font-medium shrink-0">
+            ${initialsFrom(fullName(a))}
+          </span>
+          <div class="flex-1 min-w-0">
+            <p class="font-inter text-sm text-[#002735] dark:text-[#ebf5f8] truncate">${fullName(a)}</p>
+            <p class="font-serif text-[11px] text-[#7c868a]">${a.gender} · ${a.age_range} · ${a.confirmed_at || ""}</p>
+          </div>
+          <span class="font-inter text-[10px] tracking-widest uppercase text-[#00adec] border border-[#00adec]/50 px-2 py-1 shrink-0">Confirmed</span>
         </div>
-        <span class="font-inter text-[10px] tracking-widest uppercase text-[#00adec] border border-[#00adec]/50 px-2 py-1 shrink-0">Confirmed</span>
-      </div>
-    `,
-   )
-   .join("");
-  confirmedCount.textContent = String(confirmed.length);
+      `,
+    )
+    .join("");
+
+   confirmedCount.textContent = String(list.length);
+  } catch (err) {
+   console.error("Refresh error:", err);
+  }
  }
 
- sortField.addEventListener("change", renderConfirmedList);
+ refreshConfirmed.addEventListener("click", refreshConfirmedFromServer);
+ sortField.addEventListener("change", refreshConfirmedFromServer);
  sortDir.addEventListener("click", function () {
   sortDirection = sortDirection === "asc" ? "desc" : "asc";
   sortDir.textContent = sortDirection.toUpperCase();
-  renderConfirmedList();
+  refreshConfirmedFromServer();
  });
- refreshConfirmed.addEventListener("click", renderConfirmedList);
 
- simulateScan.addEventListener("click", function () {
-  const pending = attendees.filter((a) => a.status === "absent");
-  if (pending.length === 0) {
-   lastScanLabel.textContent = "All attendees confirmed";
+ simulateScan.addEventListener("click", async function () {
+  const token = prompt("Paste QR token or URL:");
+  if (!token) return;
+  await handleScan(token);
+ });
+
+ async function handleScan(rawToken) {
+  lastScanLabel.textContent = "Scanning...";
+  lastScanLabel.classList.remove("text-[#00adec]");
+
+  try {
+   const res = await fetch(API.scan, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({token: rawToken}),
+   });
+   const data = await res.json();
+
+   if (!data.ok) {
+    lastScanLabel.textContent = data.error || "Scan failed";
+    lastScanLabel.classList.add("text-[#00adec]");
+    return;
+   }
+
+   lastScanLabel.classList.remove("text-[#00adec]");
+   lastScanLabel.textContent =
+    data.attendee.first_name +
+    " " +
+    data.attendee.last_name +
+    " · " +
+    data.attendee.confirmed_at;
+
+   await fetchAllAttendees();
+   await refreshConfirmedFromServer();
+   renderConfirmedTable();
+   renderAbsentTable();
+   renderAttendeesTable();
+  } catch (err) {
+   console.error("Scan error:", err);
+   lastScanLabel.textContent = "Network error";
+  }
+ }
+
+ let html5Qr = null;
+ let scanning = false;
+ let cameraStarting = false;
+
+ function releaseAllCameraTracks() {
+  document.querySelectorAll("video").forEach((v) => {
+   const stream = v.srcObject;
+   if (stream && typeof stream.getTracks === "function") {
+    stream.getTracks().forEach((t) => t.stop());
+   }
+   v.srcObject = null;
+  });
+ }
+
+ async function startCamera() {
+  if (html5Qr || cameraStarting) return;
+  cameraStarting = true;
+
+  const feed = document.getElementById("cameraFeed");
+  if (!feed) {
+   lastScanLabel.textContent = "Camera container missing";
+   cameraStarting = false;
    return;
   }
-  const next = pending[0];
-  next.status = "confirmed";
-  next.confirmedAt = "2026-10-12 " + formatTime();
-  lastScanLabel.textContent =
-   next.firstName + " " + next.lastName + " · " + next.confirmedAt;
-  renderAll();
+
+  releaseAllCameraTracks();
+  await new Promise((r) => setTimeout(r, 300));
+
+  feed.innerHTML = "";
+  html5Qr = new Html5Qrcode("cameraFeed");
+
+  try {
+   await html5Qr.start(
+    {facingMode: "environment"},
+    {
+     fps: 15,
+     qrbox: (w, h) => {
+      const size = Math.floor(Math.min(w, h) * 0.7);
+      return {width: size, height: size};
+     },
+     disableFlip: false,
+     experimentalFeatures: {
+      useBarCodeDetectorIfSupported: true,
+     },
+    },
+    async (decodedText) => {
+     if (scanning) return;
+     scanning = true;
+     await handleScan(decodedText);
+     setTimeout(() => {
+      scanning = false;
+     }, 800);
+    },
+    () => {},
+   );
+
+   toggleCamera.textContent = "Stop";
+   lastScanLabel.textContent = "Camera ready";
+  } catch (err) {
+   console.error("Camera start failed:", err);
+
+   try {
+    if (html5Qr) await html5Qr.clear();
+   } catch (_) {}
+   html5Qr = null;
+
+   if (err && err.name === "NotAllowedError") {
+    lastScanLabel.textContent = "Camera permission denied";
+   } else if (err && err.name === "NotReadableError") {
+    lastScanLabel.textContent = "Camera in use by another app";
+   } else if (err && err.name === "NotFoundError") {
+    lastScanLabel.textContent = "No camera found";
+   } else {
+    lastScanLabel.textContent = "Camera unavailable";
+   }
+
+   toggleCamera.textContent = "Start";
+  } finally {
+   cameraStarting = false;
+  }
+ }
+
+ async function stopCamera() {
+  if (!html5Qr) {
+   releaseAllCameraTracks();
+   return;
+  }
+  try {
+   await html5Qr.stop();
+   await html5Qr.clear();
+  } catch (err) {
+   console.warn("Camera stop warning:", err);
+  } finally {
+   html5Qr = null;
+   releaseAllCameraTracks();
+  }
+ }
+
+ toggleCamera.addEventListener("click", async function () {
+  if (cameraStarting) return;
+  const isRunning = toggleCamera.textContent.trim() === "Stop";
+  if (isRunning) {
+   await stopCamera();
+   toggleCamera.textContent = "Start";
+  } else {
+   toggleCamera.textContent = "Starting...";
+   await startCamera();
+  }
  });
 
- toggleCamera.addEventListener("click", function () {
-  const isStopped = toggleCamera.textContent.trim() === "Start";
-  toggleCamera.textContent = isStopped ? "Stop" : "Start";
- });
+ setInterval(() => {
+  if (currentPage === "scanner") refreshConfirmedFromServer();
+ }, 5000);
 
  closeCameraModal.addEventListener("click", function () {
   cameraModal.classList.add("hidden");
@@ -573,11 +532,11 @@
    .map(
     (a) => `
       <tr>
-        <td class="py-3 px-4 text-[#0b1214] dark:text-[#ebf5f8]">${a.firstName} ${a.middleName ? a.middleName + " " : ""}${a.lastName}</td>
+        <td class="py-3 px-4 text-[#0b1214] dark:text-[#ebf5f8]">${fullName(a)}</td>
         <td class="py-3 px-4 text-[#7c868a]">${a.email}</td>
         <td class="py-3 px-4 text-[#7c868a]">${a.gender}</td>
-        <td class="py-3 px-4 text-[#7c868a]">${a.age}</td>
-        <td class="py-3 px-4 text-[#7c868a]">${a.visitorType}</td>
+        <td class="py-3 px-4 text-[#7c868a]">${a.age_range}</td>
+        <td class="py-3 px-4 text-[#7c868a]">${a.visitor_type}</td>
         <td class="py-3 px-4">
           ${
            a.status === "confirmed"
@@ -599,7 +558,7 @@
   const btn = e.target.closest("button[data-action]");
   if (!btn) return;
   const id = btn.getAttribute("data-id");
-  const attendee = attendees.find((a) => a.id === id);
+  const attendee = attendees.find((a) => String(a.id) === String(id));
   if (!attendee) return;
 
   if (btn.getAttribute("data-action") === "edit") {
@@ -607,10 +566,10 @@
   } else if (btn.getAttribute("data-action") === "delete") {
    showConfirm(
     "Delete Attendee",
-    `Remove ${attendee.firstName} ${attendee.lastName} from the registry?`,
+    `Remove ${fullName(attendee)} from the registry?`,
     "Delete",
     function () {
-     attendees = attendees.filter((a) => a.id !== id);
+     attendees = attendees.filter((a) => String(a.id) !== String(id));
      renderAll();
     },
    );
@@ -623,11 +582,11 @@
    .map(
     (a) => `
       <tr>
-        <td class="py-3 px-4 text-[#0b1214] dark:text-[#ebf5f8]">${a.firstName} ${a.middleName ? a.middleName + " " : ""}${a.lastName}</td>
+        <td class="py-3 px-4 text-[#0b1214] dark:text-[#ebf5f8]">${fullName(a)}</td>
         <td class="py-3 px-4 text-[#7c868a]">${a.gender}</td>
-        <td class="py-3 px-4 text-[#7c868a]">${a.age}</td>
+        <td class="py-3 px-4 text-[#7c868a]">${a.age_range}</td>
         <td class="py-3 px-4 text-[#7c868a]">${a.classification}</td>
-        <td class="py-3 px-4 text-[#7c868a]">${a.confirmedAt}</td>
+        <td class="py-3 px-4 text-[#7c868a]">${a.confirmed_at || ""}</td>
       </tr>
     `,
    )
@@ -640,10 +599,10 @@
    .map(
     (a) => `
       <tr>
-        <td class="py-3 px-4 text-[#0b1214] dark:text-[#ebf5f8]">${a.firstName} ${a.middleName ? a.middleName + " " : ""}${a.lastName}</td>
+        <td class="py-3 px-4 text-[#0b1214] dark:text-[#ebf5f8]">${fullName(a)}</td>
         <td class="py-3 px-4 text-[#7c868a]">${a.email}</td>
         <td class="py-3 px-4 text-[#7c868a]">${a.gender}</td>
-        <td class="py-3 px-4 text-[#7c868a]">${a.age}</td>
+        <td class="py-3 px-4 text-[#7c868a]">${a.age_range}</td>
         <td class="py-3 px-4 text-[#7c868a]">${a.classification}</td>
       </tr>
     `,
@@ -652,6 +611,7 @@
  }
 
  function certificateHTML(a) {
+  const name = fullName(a);
   return `
       <div class="cert-a4 flex flex-col justify-between p-16" style="font-family: 'Source Serif 4', Georgia, serif;">
         <div class="flex items-center justify-between">
@@ -665,7 +625,7 @@
             </div>
           </div>
           <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#7c868a;">
-            Certificate No. ${a.id}
+            Certificate No. ${a.uuid || a.id}
           </div>
         </div>
 
@@ -674,7 +634,7 @@
           <div style="width:80px;height:1px;background:#00adec;margin:18px auto;"></div>
           <p style="font-family:'Source Serif 4',serif;font-size:14px;color:#35393a;margin-bottom:22px;">This certifies that</p>
           <h2 style="font-family:'Source Serif 4',serif;font-size:52px;line-height:1.05;color:#002735;font-weight:600;margin-bottom:22px;">
-            ${a.firstName} ${a.middleName ? a.middleName + " " : ""}${a.lastName}
+            ${name}
           </h2>
           <p style="font-family:'Source Serif 4',serif;font-size:14px;color:#35393a;line-height:1.7;max-width:640px;margin:0 auto;">
             has successfully attended the <strong style="color:#002735;">8th Research, Statistics, and Innovation Forum</strong>,
@@ -707,7 +667,7 @@
             ${certificateHTML(a)}
           </div>
         </div>
-        <p class="font-inter text-xs text-[#002735] dark:text-[#ebf5f8] truncate">${a.firstName} ${a.lastName}</p>
+        <p class="font-inter text-xs text-[#002735] dark:text-[#ebf5f8] truncate">${fullName(a)}</p>
         <p class="font-serif text-[11px] text-[#7c868a] mb-3">${a.classification}</p>
         <button type="button" data-cert-id="${a.id}" class="cert-open-btn mt-auto font-inter text-[10px] tracking-[0.25em] uppercase border border-[#7c868a]/40 text-[#35393a] dark:text-[#ebf5f8] py-2 hover:border-[#00adec] hover:text-[#00adec] transition-colors">Open</button>
       </div>
@@ -720,7 +680,7 @@
   const btn = e.target.closest(".cert-open-btn");
   if (!btn) return;
   const id = btn.getAttribute("data-cert-id");
-  const attendee = attendees.find((a) => a.id === id);
+  const attendee = attendees.find((a) => String(a.id) === String(id));
   if (!attendee) return;
   certModalContent.innerHTML = certificateHTML(attendee);
   certModalContent.style.transform = "scale(0.55)";
@@ -742,8 +702,7 @@
  }
 
  certPrintBtn.addEventListener("click", function () {
-  const html = certModalContent.innerHTML;
-  certPrintArea.innerHTML = html;
+  certPrintArea.innerHTML = certModalContent.innerHTML;
   certPrintArea.classList.remove("hidden");
   window.print();
   setTimeout(() => certPrintArea.classList.add("hidden"), 500);
@@ -781,15 +740,16 @@
   if (attendee) {
    editingAttendeeId = attendee.id;
    attendeeModalTitle.textContent = "Edit Attendee";
-   attendeeModalLabel.textContent = "Attendee · " + attendee.id;
-   document.getElementById("mFirstName").value = attendee.firstName;
-   document.getElementById("mMiddleName").value = attendee.middleName || "";
-   document.getElementById("mLastName").value = attendee.lastName;
+   attendeeModalLabel.textContent =
+    "Attendee · " + (attendee.uuid || attendee.id);
+   document.getElementById("mFirstName").value = attendee.first_name;
+   document.getElementById("mMiddleName").value = attendee.middle_name || "";
+   document.getElementById("mLastName").value = attendee.last_name;
    document.getElementById("mEmail").value = attendee.email;
    document.getElementById("mGender").value = attendee.gender;
-   document.getElementById("mAge").value = attendee.age;
+   document.getElementById("mAge").value = attendee.age_range;
    document.getElementById("mClassification").value = attendee.classification;
-   document.getElementById("mVisitorType").value = attendee.visitorType;
+   document.getElementById("mVisitorType").value = attendee.visitor_type;
    document.getElementById("mAffiliation").value = attendee.affiliation;
    document.getElementById("mRegion").value = attendee.region;
   } else {
@@ -805,7 +765,7 @@
    document.getElementById("mClassification").value = "Student / Academe";
    document.getElementById("mVisitorType").value = "Participant / Walk-in";
    document.getElementById("mAffiliation").value = "";
-   document.getElementById("mRegion").value = regionsList[6];
+   document.getElementById("mRegion").value = "Region IV-A (CALABARZON)";
   }
   attendeeModal.classList.remove("hidden");
   attendeeModal.classList.add("flex");
@@ -822,35 +782,7 @@
  cancelAttendeeBtn.addEventListener("click", closeAttendeeModalFn);
 
  saveAttendeeBtn.addEventListener("click", function () {
-  const data = {
-   firstName: document.getElementById("mFirstName").value.trim(),
-   middleName: document.getElementById("mMiddleName").value.trim(),
-   lastName: document.getElementById("mLastName").value.trim(),
-   email: document.getElementById("mEmail").value.trim(),
-   gender: document.getElementById("mGender").value,
-   age: document.getElementById("mAge").value,
-   classification: document.getElementById("mClassification").value,
-   visitorType: document.getElementById("mVisitorType").value,
-   affiliation: document.getElementById("mAffiliation").value.trim(),
-   region: document.getElementById("mRegion").value,
-  };
-
-  if (!data.firstName || !data.lastName || !data.email) {
-   return;
-  }
-
-  if (editingAttendeeId) {
-   const idx = attendees.findIndex((a) => a.id === editingAttendeeId);
-   if (idx >= 0) attendees[idx] = Object.assign({}, attendees[idx], data);
-  } else {
-   const newId = "RSI-" + String(attendees.length + 1).padStart(4, "0");
-   attendees.push(
-    Object.assign({id: newId, status: "absent", confirmedAt: ""}, data),
-   );
-  }
-
-  closeAttendeeModalFn();
-  renderAll();
+  alert("CRUD endpoints will be added in step 6.");
  });
 
  updatePasswordBtn.addEventListener("click", function () {
@@ -897,9 +829,9 @@
   if (!q) return;
   const match = attendees.find(
    (a) =>
-    (a.firstName + " " + a.lastName).toLowerCase().includes(q) ||
+    fullName(a).toLowerCase().includes(q) ||
     a.email.toLowerCase().includes(q) ||
-    a.id.toLowerCase().includes(q),
+    (a.uuid || "").toLowerCase().includes(q),
   );
   if (match) {
    if (currentPage !== "attendees") navigateTo("attendees");
@@ -933,6 +865,10 @@
   renderAbsentTable();
   renderConfirmedList();
   if (currentPage === "certificates") renderCertificates();
+ }
+
+ function renderConfirmedList() {
+  refreshConfirmedFromServer();
  }
 
  renderAll();

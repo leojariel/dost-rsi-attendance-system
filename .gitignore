@@ -1,3 +1,43 @@
-node_modules/
-public/css/output.css
+# Dependencies
+/node_modules/
+/vendor/
+
+# Generated frontend assets
+/public/css/output.css
+
+# Runtime and personal attendee data
+*.log
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+/public/api/config_orig.php
+config.local.php
+*.local.php
+
+# Database files, exports, and backups
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.sql
+*.csv
+*.bak
+*.backup
+/backups/
+/exports/
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+
+# IDE and operating-system files
+.vscode/
+.idea/
 .DS_Store
+Thumbs.db
+Desktop.ini
