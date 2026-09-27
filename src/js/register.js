@@ -15,8 +15,8 @@
  const closeModalIcon = document.getElementById("closeModalIcon");
  const confirmBtn = document.getElementById("confirmSignature");
  const signatureStatus = document.getElementById("signatureStatus");
-
- const TOTAL_REQUIRED = 10;
+ const successModal = document.getElementById("registrationSuccess");
+ const closeSuccess = document.getElementById("closeSuccess");
 
  function isFilled(el) {
   if (!el) return false;
@@ -25,41 +25,58 @@
  }
 
  function getRequiredGroups() {
-  return {
-   privacyConsent: [document.getElementById("privacyConsent")],
-   firstName: [document.getElementById("firstName")],
-   lastName: [document.getElementById("lastName")],
-   gender: [document.getElementById("gender")],
-   ageRange: Array.from(document.querySelectorAll('input[name="ageRange"]')),
-   classification: [document.getElementById("classification")],
-   contactEmail: [document.getElementById("contactEmail")],
-   visitorType: Array.from(
-    document.querySelectorAll('input[name="visitorType"]'),
-   ),
-   affiliation: [document.getElementById("affiliation")],
-   region: [document.getElementById("region")],
-  };
+   const groups = new Map();
+   form.querySelectorAll("[required][name]").forEach((control) => {
+    if (!groups.has(control.name)) groups.set(control.name, []);
+    groups.get(control.name).push(control);
+   });
+   return Array.from(groups.values());
  }
 
  function computeProgress() {
-  const groups = getRequiredGroups();
-  let filled = 0;
-  Object.values(groups).forEach((group) => {
-   if (group.some(isFilled)) filled += 1;
-  });
-  return filled;
+  const groups = [
+   {controls: [document.getElementById("privacyConsent")]},
+   {
+    controls: [
+     document.getElementById("firstName"),
+     document.getElementById("lastName"),
+    ],
+    requireAll: false,
+   },
+   {controls: [document.getElementById("gender")]},
+   {controls: [document.getElementById("classification")]},
+   {controls: [document.getElementById("contactEmail")]},
+   {controls: Array.from(form.querySelectorAll('input[name="visitorType"]'))},
+   {controls: [document.getElementById("affiliation")]},
+   {controls: [document.getElementById("region")]},
+   {controls: Array.from(form.querySelectorAll('input[name="activities"]'))},
+  ];
+  const filled = groups.filter((group) =>
+   group.requireAll
+    ? group.controls.every(isFilled)
+    : group.controls.some(isFilled),
+  ).length;
+  const requiredComplete = getRequiredGroups().every((group) =>
+   group.some(isFilled),
+  );
+  return {filled, total: groups.length, requiredComplete};
  }
 
  function updateProgress() {
-  const filled = computeProgress();
-  const pct = (filled / TOTAL_REQUIRED) * 100;
+  const {filled, total, requiredComplete} = computeProgress();
+  const pct = total ? (filled / total) * 100 : 100;
   progressFill.style.width = pct + "%";
-  progressDot.style.left = "calc(" + pct + "% - 3px)";
+  progressDot.style.left = "calc(" + pct + "% - 4px)";
   progressBar.setAttribute("aria-valuenow", String(filled));
-  progressValue.textContent = filled + " / " + TOTAL_REQUIRED;
+  progressBar.setAttribute("aria-valuemax", String(total));
+  progressValue.textContent = filled + " / " + total;
 
-  if (filled === TOTAL_REQUIRED) {
+  if (filled === total) {
    progressStatus.textContent = "Complete";
+   progressStatus.classList.remove("text-[#7c868a]");
+   progressStatus.classList.add("text-[#00adec]");
+  } else if (requiredComplete) {
+   progressStatus.textContent = "Ready";
    progressStatus.classList.remove("text-[#7c868a]");
    progressStatus.classList.add("text-[#00adec]");
   } else {
@@ -68,7 +85,7 @@
    progressStatus.classList.remove("text-[#00adec]");
   }
 
-  continueBtn.disabled = filled !== TOTAL_REQUIRED;
+  continueBtn.disabled = !requiredComplete;
  }
 
  form.addEventListener("input", updateProgress);
@@ -176,6 +193,19 @@
   document.body.style.overflow = "";
  }
 
+ function showSuccess() {
+  closeModal();
+  successModal.classList.remove("hidden");
+  successModal.classList.add("flex");
+  closeSuccess.focus();
+ }
+
+ function closeSuccessModal() {
+  successModal.classList.add("hidden");
+  successModal.classList.remove("flex");
+  document.body.style.overflow = "";
+ }
+
  canvas.addEventListener("mousedown", startDraw);
  canvas.addEventListener("mousemove", draw);
  canvas.addEventListener("mouseup", endDraw);
@@ -188,15 +218,16 @@
  clearBtn.addEventListener("click", clearCanvas);
  cancelBtn.addEventListener("click", closeModal);
  closeModalIcon.addEventListener("click", closeModal);
+ closeSuccess.addEventListener("click", closeSuccessModal);
  confirmBtn.addEventListener("click", function () {
   if (!hasSignature) return;
-  closeModal();
-  alert("Registration submitted successfully.");
+  showSuccess();
  });
 
  document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-   closeModal();
+  if (e.key === "Escape") {
+   if (!modal.classList.contains("hidden")) closeModal();
+   if (!successModal.classList.contains("hidden")) closeSuccessModal();
   }
  });
 
