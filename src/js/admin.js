@@ -656,12 +656,9 @@
       <div class="cert-a4 flex flex-col justify-between p-16" style="font-family: 'Source Serif 4', Georgia, serif;">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3" style="color:#002735;">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00adec" stroke-width="1.2">
-              <path d="M12 3l9 6-9 6-9-6 9-6Z" stroke-linejoin="round" />
-              <path d="M3 15l9 6 9-6" stroke-linejoin="round" />
-            </svg>
+            <img src="./assets/icons/dost-logo.svg" alt="DOST logo" style="width:40px;height:40px;object-fit:contain;" />
             <div style="font-family:'Inter',sans-serif;letter-spacing:0.25em;font-size:11px;text-transform:uppercase;">
-              DOST · 8th RSI Forum
+              DOST CALABARZON · 8th RSI Forum
             </div>
           </div>
           <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#7c868a;">
@@ -677,7 +674,7 @@
             ${a.firstName} ${a.middleName ? a.middleName + " " : ""}${a.lastName}
           </h2>
           <p style="font-family:'Source Serif 4',serif;font-size:14px;color:#35393a;line-height:1.7;max-width:640px;margin:0 auto;">
-            has successfully attended the <strong style="color:#002735;">8th Research, Statistics, and Innovation Forum</strong>,
+            has successfully attended the <strong style="color:#002735;">8th Regional Science and Innovation Forum</strong>,
             held on October 12–14, 2026 at the Quezon Convention Center, Lucena City, Quezon.
           </p>
         </div>

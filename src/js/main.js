@@ -1,14 +1,6 @@
 (function () {
- const registerBtn = document.getElementById("registerBtn");
  const calendarBtn = document.getElementById("calendarBtn");
  const shareBtn = document.getElementById("shareBtn");
-
- if (registerBtn) {
-  registerBtn.addEventListener("click", function (e) {
-   e.preventDefault();
-   window.location.href = "register.html";
-  });
- }
 
  if (calendarBtn) {
   calendarBtn.addEventListener("click", function (e) {
@@ -25,7 +17,7 @@
    if (navigator.share) {
     navigator
      .share({
-      title: "8th Research, Statistic, and Innovation Forum",
+      title: "8th Regional Science and Innovation Forum",
       text: "Oct 12–14, 2026 · Quezon Convention Center, Lucena City",
       url: window.location.href,
      })
