@@ -1,3 +1,12 @@
+# Latest Updates
+
+- Refreshed the public interface with the official DOST logo, updated typography, colors, backgrounds, and visual styling.
+- Updated the event presentation to the 8th Regional Science and Innovation Forum, including its registration-page messaging.
+- Added dedicated home and registration background images for a more consistent event experience.
+- Replaced the age-range selector with a numeric age field that accepts whole-number values from 1 to 120.
+- Aligned client-side and server-side registration validation with the new age input and clearer validation messages.
+- Improved the registration experience with browser autocomplete disabled and refined responsive content panels.
+
 # DOST 8th RSI Forum Attendance System
 
 A PHP-based registration, QR attendance, and administrative management system for the DOST 8th Research, Statistics, and Innovation Forum.
