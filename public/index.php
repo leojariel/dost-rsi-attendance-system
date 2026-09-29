@@ -4,7 +4,7 @@
 <head>
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>8th Research, Statistics, and Innovation Forum</title>
+ <title>About — 8th RSI Forum</title>
  <link rel="stylesheet" href="./css/output.css" />
  <link rel="stylesheet" href="./css/globals.css" />
  <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,16 +33,7 @@
   <div
    class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
    <a href="./index.html" class="flex items-center gap-2 text-[#002735]">
-    <svg
-     class="w-6 h-6"
-     viewBox="0 0 24 24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.5"
-     aria-hidden="true">
-     <path d="M12 3l9 6-9 6-9-6 9-6Z" stroke-linejoin="round" />
-     <path d="M3 15l9 6 9-6" stroke-linejoin="round" />
-    </svg>
+    <img src="../public/assets/icons/dost-logo.svg" class="w-6 h-6" alt="">
     <span class="font-medium tracking-wide text-sm uppercase">DOST · 8th RSI Forum</span>
    </a>
    <nav
@@ -55,7 +46,7 @@
 
  <section
   class="relative min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
-  style="background-image: url(&quot;./images/hero.jpg&quot;)">
+  style="background-image: url(&quot;../public/assets/images/home-background.png&quot;)">
   <svg
    class="absolute inset-0 h-full w-full pointer-events-none"
    xmlns="http://www.w3.org/2000/svg"
@@ -86,8 +77,8 @@
       to bottom,
       rgba(235, 245, 248, 0.35) 0%,
       rgba(235, 245, 248, 0.2) 40%,
-      rgba(0, 39, 53, 0.7) 88%,
-      rgba(0, 39, 53, 0.95) 100%
+      #46a0c1bb  88%,
+      #46a0c1 100%
      );
     "></div>
 
@@ -97,7 +88,7 @@
     <h1
      class="font-inter text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#002735] max-w-4xl leading-none"
      style="text-shadow: 0 1px 4px rgba(235, 245, 248, 0.6)">
-     8th Research, Statistic, and Innovation Forum
+     8th Regional Science and Innovation Forum
     </h1>
 
     <div
@@ -195,13 +186,13 @@
   </div>
  </section>
 
- <main id="about" class="bg-[#ebf5f8]">
+ <main id="about" class="bg-[#46a0c1]">
   <div class="mx-auto w-full max-w-6xl px-4 py-12 md:px-8 md:py-16">
    <div
     class="grid grid-cols-1 lg:grid-cols-[1.9fr_1fr] gap-5 lg:gap-6 items-start">
     <div class="flex flex-col gap-5 lg:gap-6">
      <div
-      class="bg-white border border-[#7c868a]/30 shadow-sm p-7 md:p-8 flex flex-col">
+      class="bg-white border border-[#7c868a]/30 shadow-sm p-7 md:p-8 flex flex-col rounded-lg">
       <div
        class="flex items-center gap-2 border-b border-[#7c868a]/25 pb-3 mb-5">
        <svg
@@ -270,7 +261,7 @@
      </div>
 
      <div
-      class="bg-white border border-[#7c868a]/30 shadow-sm p-7 md:p-8 flex flex-col">
+      class="bg-white border border-[#7c868a]/30 shadow-sm p-7 md:p-8 flex flex-col rounded-lg">
       <div
        class="flex items-center gap-2 border-b border-[#7c868a]/25 pb-3 mb-5">
        <svg
@@ -357,7 +348,7 @@
 
     <div class="w-full lg:sticky lg:top-8 lg:self-start">
      <div
-      class="bg-[#002735] text-[#ebf5f8] border border-[#005b7b]/40 p-7 md:p-8 flex flex-col">
+      class="bg-[#002735] text-[#ebf5f8] border border-[#005b7b]/40 p-7 md:p-8 flex flex-col rounded-lg">
       <div
        class="flex items-center gap-2 border-b border-[#005b7b]/40 pb-3 mb-5">
        <svg

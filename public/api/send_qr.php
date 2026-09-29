@@ -60,7 +60,7 @@ function send_qr_email(string $email, string $name, string $token): void
   $mail->addAddress($email, $name);
 
   $mail->isHTML(true);
-  $mail->Subject = 'Your QR Pass for 8th Research, Statistics, and Innovation Forum';
+  $mail->Subject = 'Your QR Pass for 8th Regional Science and Innovation Forum';
   $mail->Body = qr_email_html($name);
   $mail->AltBody = qr_email_plain($name);
 

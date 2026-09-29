@@ -11,7 +11,6 @@ $in = json_in();
 
 // Whitelists — the frontend can send anything, we only accept these.
 $GENDERS = ['male', 'female', 'other'];
-$AGE_RANGES = ['1-14', '15-30', '31-59', '60+'];
 $CLASSIFICATIONS = [
  'business',
  'government',
@@ -78,9 +77,16 @@ if ($gender === '') {
 // ─── Age range ────────────────────────────────────
 $ageRange = field($in, 'ageRange');
 if ($ageRange === '') {
- $errors['ageRange'] = 'Age range is required.';
-} elseif (!in_array($ageRange, $AGE_RANGES, true)) {
- $errors['ageRange'] = 'Invalid age range.';
+ $errors['ageRange'] = 'Age is required.';
+} elseif (!ctype_digit($ageRange)) {
+ $errors['ageRange'] = 'Age must be a whole number.';
+} else {
+ $ageInt = (int)$ageRange;
+ if ($ageInt < 1 || $ageInt > 120) {
+  $errors['ageRange'] = 'Age must be between 1 and 120.';
+ } else {
+  $ageRange = (string)$ageInt;
+ }
 }
 
 // ─── Classification ───────────────────────────────
