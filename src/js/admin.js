@@ -24,9 +24,11 @@
 
 (function () {
  const API = {
-  scan: "/dost-rsi-attendance-system/public/api/scan.php",
-  list: "/dost-rsi-attendance-system/public/api/list_attendees.php",
- };
+    scan: "/dost-rsi-attendance-system/public/api/scan.php",
+    list: "/dost-rsi-attendance-system/public/api/list_attendees.php",
+    certificate:
+        "/dost-rsi-attendance-system/public/api/certificate/generate.php",
+};
 
  const SUPER_ADMIN_PASSWORD = "thescript";
  const STORAGE_ADMINS = "rsi-admins";
@@ -96,12 +98,11 @@
  const closeCameraModal = document.getElementById("closeCameraModal");
 
  const certModal = document.getElementById("certModal");
- const certModalContent = document.getElementById("certModalContent");
- const certCloseBtn = document.getElementById("certCloseBtn");
- const certPrintBtn = document.getElementById("certPrintBtn");
- const certPrintArea = document.getElementById("certPrintArea");
- const certGrid = document.getElementById("certGrid");
- const printAllCerts = document.getElementById("printAllCerts");
+  const certModalContent = document.getElementById("certModalContent");
+  const certCloseBtn = document.getElementById("certCloseBtn");
+  const certDownloadBtn = document.getElementById("certDownloadBtn");
+  const certPrintBtn = document.getElementById("certPrintBtn");
+  const certGrid = document.getElementById("certGrid");
 
  const confirmedList = document.getElementById("confirmedList");
  const confirmedCount = document.getElementById("confirmedCount");
@@ -371,42 +372,208 @@
   await handleScan(token);
  });
 
- async function handleScan(rawToken) {
-  lastScanLabel.textContent = "Scanning...";
-  lastScanLabel.classList.remove("text-[#00adec]");
+ let scannedToken = null;
+let scannedAttendee = null;
 
-  try {
-   const res = await fetch(API.scan, {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({token: rawToken}),
-   });
-   const data = await res.json();
+async function handleScan(rawToken) {
+    lastScanLabel.textContent = "Looking up attendee...";
+    lastScanLabel.classList.remove("text-[#00adec]");
 
-   if (!data.ok) {
-    lastScanLabel.textContent = data.error || "Scan failed";
-    lastScanLabel.classList.add("text-[#00adec]");
-    return;
-   }
+    try {
+        // STEP 1: LOOKUP ONLY
+        const res = await fetch(API.scan, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                token: rawToken,
+                action: "lookup",
+            }),
+        });
 
-   lastScanLabel.classList.remove("text-[#00adec]");
-   lastScanLabel.textContent =
-    data.attendee.first_name +
-    " " +
-    data.attendee.last_name +
-    " · " +
-    data.attendee.confirmed_at;
+        const data = await res.json();
 
-   await fetchAllAttendees();
-   await refreshConfirmedFromServer();
-   renderConfirmedTable();
-   renderAbsentTable();
-   renderAttendeesTable();
-  } catch (err) {
-   console.error("Scan error:", err);
-   lastScanLabel.textContent = "Network error";
-  }
- }
+        if (!data.ok) {
+            lastScanLabel.textContent =
+                data.error || "Scan failed";
+
+            lastScanLabel.classList.add("text-[#00adec]");
+            return;
+        }
+
+        // Save scanned information temporarily
+        scannedToken = rawToken;
+        scannedAttendee = data.attendee;
+
+        const attendee = data.attendee;
+
+        const name = [
+            attendee.first_name,
+            attendee.middle_name,
+            attendee.last_name,
+        ]
+            .filter(Boolean)
+            .join(" ");
+
+        // Update scanner status
+        lastScanLabel.classList.remove("text-[#00adec]");
+        lastScanLabel.textContent = name;
+
+        // Show attendee information in confirmation modal
+        confirmLabel.textContent = "Attendance Verification";
+
+        confirmTitle.textContent = name;
+
+        confirmMessage.innerHTML = `
+            <div class="space-y-2">
+                <p>
+                    <strong>Gender:</strong>
+                    ${attendee.gender || "—"}
+                </p>
+
+                <p>
+                    <strong>Age Range:</strong>
+                    ${attendee.age_range || "—"}
+                </p>
+
+                <p>
+                    <strong>Classification:</strong>
+                    ${attendee.classification || "—"}
+                </p>
+
+                <p>
+                    <strong>Affiliation:</strong>
+                    ${attendee.affiliation || "—"}
+                </p>
+
+                <p>
+                    <strong>Region:</strong>
+                    ${attendee.region || "—"}
+                </p>
+
+                <p class="pt-3 text-[#00adec]">
+                    Please verify that these details match
+                    the person present.
+                </p>
+            </div>
+        `;
+
+        confirmOkBtn.textContent = "Confirm Attendance";
+
+        // When Confirm is clicked
+        confirmCallback = confirmAttendance;
+
+        // Open modal
+        confirmModal.classList.remove("hidden");
+        confirmModal.classList.add("flex");
+
+    } catch (err) {
+
+        console.error("Scan error:", err);
+
+        lastScanLabel.textContent = "Network error";
+        lastScanLabel.classList.add("text-[#00adec]");
+    }
+}
+
+async function confirmAttendance() {
+
+    if (!scannedToken || !scannedAttendee) {
+        console.error("No scanned attendee available.");
+        return;
+    }
+
+    confirmOkBtn.disabled = true;
+    confirmOkBtn.textContent = "Confirming...";
+
+    try {
+
+        const res = await fetch(API.scan, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                token: scannedToken,
+                action: "confirm",
+            }),
+        });
+
+        const data = await res.json();
+
+        if (!data.ok) {
+
+            alert(
+                data.error ||
+                "Unable to confirm attendance."
+            );
+
+            return;
+        }
+
+        // Close confirmation modal
+        confirmModal.classList.add("hidden");
+        confirmModal.classList.remove("flex");
+
+        // Update scanner status
+        const attendee = data.attendee;
+
+        const name = [
+            attendee.first_name,
+            attendee.middle_name,
+            attendee.last_name,
+        ]
+            .filter(Boolean)
+            .join(" ");
+
+        lastScanLabel.textContent =
+            name + " · Confirmed";
+
+        lastScanLabel.classList.remove(
+            "text-[#00adec]"
+        );
+
+        // Refresh attendee data
+        await fetchAllAttendees();
+
+        renderAll();
+
+        console.log(
+            "Attendance confirmed:",
+            data
+        );
+
+        if (data.certificate) {
+            console.log(
+                "Certificate generated:",
+                data.certificate.path
+            );
+        }
+
+    } catch (err) {
+
+        console.error(
+            "Confirmation error:",
+            err
+        );
+
+        alert(
+            "Network error while confirming attendance."
+        );
+
+    } finally {
+
+        confirmOkBtn.disabled = false;
+        confirmOkBtn.textContent =
+            "Confirm Attendance";
+
+        scannedToken = null;
+        scannedAttendee = null;
+    }
+}
+
+
 
  let html5Qr = null;
  let scanning = false;
@@ -459,7 +626,7 @@
      await handleScan(decodedText);
      setTimeout(() => {
       scanning = false;
-     }, 800);
+     }, 2000);
     },
     () => {},
    );
@@ -610,108 +777,172 @@
    .join("");
  }
 
- function certificateHTML(a) {
-  const name = fullName(a);
-  return `
-      <div class="cert-a4 flex flex-col justify-between p-16" style="font-family: 'Source Serif 4', Georgia, serif;">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3" style="color:#002735;">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00adec" stroke-width="1.2">
-              <path d="M12 3l9 6-9 6-9-6 9-6Z" stroke-linejoin="round" />
-              <path d="M3 15l9 6 9-6" stroke-linejoin="round" />
-            </svg>
-            <div style="font-family:'Inter',sans-serif;letter-spacing:0.25em;font-size:11px;text-transform:uppercase;">
-              DOST · 8th RSI Forum
-            </div>
-          </div>
-          <div style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#7c868a;">
-            Certificate No. ${a.uuid || a.id}
-          </div>
-        </div>
+function getCertificatePath(attendee) {
+  return `/dost-rsi-attendance-system/public/generated/certificates/certificate_${attendee.id}.pdf`;
+}
 
-        <div class="text-center my-8">
-          <p style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:0.35em;text-transform:uppercase;color:#00adec;">Certificate of Attendance</p>
-          <div style="width:80px;height:1px;background:#00adec;margin:18px auto;"></div>
-          <p style="font-family:'Source Serif 4',serif;font-size:14px;color:#35393a;margin-bottom:22px;">This certifies that</p>
-          <h2 style="font-family:'Source Serif 4',serif;font-size:52px;line-height:1.05;color:#002735;font-weight:600;margin-bottom:22px;">
-            ${name}
-          </h2>
-          <p style="font-family:'Source Serif 4',serif;font-size:14px;color:#35393a;line-height:1.7;max-width:640px;margin:0 auto;">
-            has successfully attended the <strong style="color:#002735;">8th Research, Statistics, and Innovation Forum</strong>,
-            held on October 12–14, 2026 at the Quezon Convention Center, Lucena City, Quezon.
-          </p>
-        </div>
 
-        <div class="flex items-end justify-between">
-          <div>
-            <div style="border-bottom:1px solid #002735;width:220px;margin-bottom:6px;height:34px;"></div>
-            <p style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#35393a;">Event Chairperson</p>
-          </div>
-          <div class="text-right">
-            <div style="border-bottom:1px solid #002735;width:220px;margin-bottom:6px;height:34px;"></div>
-            <p style="font-family:'Inter',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#35393a;">DOST CALABARZON</p>
-          </div>
-        </div>
+function renderCertificates() {
+  const confirmed = attendees.filter(
+    (a) => a.status === "confirmed"
+  );
+
+  if (!confirmed.length) {
+    certGrid.innerHTML = `
+      <div class="col-span-full py-16 text-center">
+        <p class="font-inter text-sm text-[#7c868a]">
+          No confirmed attendees have certificates yet.
+        </p>
+        <p class="font-serif text-xs text-[#7c868a] italic mt-2">
+          Certificates are generated automatically when attendance is confirmed.
+        </p>
       </div>
     `;
- }
 
- function renderCertificates() {
-  const confirmed = attendees.filter((a) => a.status === "confirmed");
+    return;
+  }
+
   certGrid.innerHTML = confirmed
-   .map(
-    (a) => `
-      <div class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-4 flex flex-col">
-        <div class="bg-[#ebf5f8]/60 dark:bg-[#0b1214]/60 border border-[#7c868a]/25 aspect-[1.4/1] flex items-center justify-center mb-3 overflow-hidden">
-          <div style="transform: scale(0.24); transform-origin: center;">
-            ${certificateHTML(a)}
+    .map((a) => {
+      const certificatePath = getCertificatePath(a);
+
+      return `
+        <div
+          class="bg-white dark:bg-[#002735] border border-[#7c868a]/25 p-4 flex flex-col">
+
+          <div
+            class="bg-[#ebf5f8]/60 dark:bg-[#0b1214]/60 border border-[#7c868a]/25 aspect-[1.414/1] overflow-hidden mb-4">
+
+            <iframe
+              src="${certificatePath}"
+              class="w-full h-full border-0"
+              title="Certificate for ${fullName(a)}"
+              loading="lazy">
+            </iframe>
+
+          </div>
+
+          <div class="min-w-0 mb-4">
+            <p
+              class="font-inter text-sm text-[#002735] dark:text-[#ebf5f8] truncate">
+              ${fullName(a)}
+            </p>
+
+            <p
+              class="font-serif text-[11px] text-[#7c868a] mt-1">
+              ${a.classification || "Confirmed attendee"}
+            </p>
+
+            <p
+              class="font-serif text-[11px] text-[#7c868a] mt-1">
+              Confirmed: ${a.confirmed_at || "—"}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 mt-auto">
+
+            <button
+              type="button"
+              data-cert-action="preview"
+              data-cert-id="${a.id}"
+              class="font-inter text-[10px] tracking-[0.15em] uppercase border border-[#7c868a]/40 text-[#35393a] dark:text-[#ebf5f8] py-2 hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer">
+              Preview
+            </button>
+
+            <a
+              href="${certificatePath}"
+              download="certificate_${a.id}.pdf"
+              class="font-inter text-[10px] tracking-[0.15em] uppercase text-center border border-[#7c868a]/40 text-[#35393a] dark:text-[#ebf5f8] py-2 hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer">
+              Download
+            </a>
+
+            <button
+              type="button"
+              data-cert-action="print"
+              data-cert-id="${a.id}"
+              class="font-inter text-[10px] tracking-[0.15em] uppercase border border-[#00adec] bg-[#00adec] text-white py-2 hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer">
+              Print
+            </button>
+
           </div>
         </div>
-        <p class="font-inter text-xs text-[#002735] dark:text-[#ebf5f8] truncate">${fullName(a)}</p>
-        <p class="font-serif text-[11px] text-[#7c868a] mb-3">${a.classification}</p>
-        <button type="button" data-cert-id="${a.id}" class="cert-open-btn mt-auto font-inter text-[10px] tracking-[0.25em] uppercase border border-[#7c868a]/40 text-[#35393a] dark:text-[#ebf5f8] py-2 hover:border-[#00adec] hover:text-[#00adec] transition-colors">Open</button>
-      </div>
-    `,
-   )
-   .join("");
- }
+      `;
+    })
+    .join("");
+}
 
- certGrid.addEventListener("click", function (e) {
-  const btn = e.target.closest(".cert-open-btn");
-  if (!btn) return;
-  const id = btn.getAttribute("data-cert-id");
-  const attendee = attendees.find((a) => String(a.id) === String(id));
+
+certGrid.addEventListener("click", function (e) {
+  const button = e.target.closest("[data-cert-action]");
+
+  if (!button) return;
+
+  const attendeeId = button.getAttribute("data-cert-id");
+
+  const attendee = attendees.find(
+    (a) => String(a.id) === String(attendeeId)
+  );
+
   if (!attendee) return;
-  certModalContent.innerHTML = certificateHTML(attendee);
-  certModalContent.style.transform = "scale(0.55)";
-  certModalContent.style.transformOrigin = "center center";
-  certModal.classList.remove("hidden");
-  certModal.classList.add("flex");
- });
 
- certCloseBtn.addEventListener("click", function () {
+  const certificatePath = getCertificatePath(attendee);
+
+  const action = button.getAttribute("data-cert-action");
+
+  if (action === "preview") {
+    certModalContent.innerHTML = `
+      <iframe
+        src="${certificatePath}"
+        class="w-[90vw] max-w-[1200px] h-[80vh] bg-white border-0"
+        title="Certificate for ${fullName(attendee)}">
+      </iframe>
+    `;
+
+    certModal.dataset.certificatePath = certificatePath;
+
+    certModal.classList.remove("hidden");
+    certModal.classList.add("flex");
+  }
+
+  if (action === "print") {
+    window.open(certificatePath, "_blank");
+  }
+});
+
+
+certCloseBtn.addEventListener("click", function () {
   certModal.classList.add("hidden");
   certModal.classList.remove("flex");
- });
 
- function printCertificates(list) {
-  certPrintArea.innerHTML = list.map(certificateHTML).join("");
-  certPrintArea.classList.remove("hidden");
-  window.print();
-  setTimeout(() => certPrintArea.classList.add("hidden"), 500);
- }
+  certModalContent.innerHTML = "";
+});
 
- certPrintBtn.addEventListener("click", function () {
-  certPrintArea.innerHTML = certModalContent.innerHTML;
-  certPrintArea.classList.remove("hidden");
-  window.print();
-  setTimeout(() => certPrintArea.classList.add("hidden"), 500);
- });
 
- printAllCerts.addEventListener("click", function () {
-  const confirmed = attendees.filter((a) => a.status === "confirmed");
-  printCertificates(confirmed);
- });
+certDownloadBtn.addEventListener("click", function () {
+  const certificatePath =
+    certModal.dataset.certificatePath;
+
+  if (!certificatePath) return;
+
+  const link = document.createElement("a");
+
+  link.href = certificatePath;
+  link.download = certificatePath.split("/").pop();
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+});
+
+
+certPrintBtn.addEventListener("click", function () {
+  const certificatePath =
+    certModal.dataset.certificatePath;
+
+  if (!certificatePath) return;
+
+  window.open(certificatePath, "_blank");
+});
 
  function showConfirm(label, message, okText, callback) {
   confirmLabel.textContent = label;
@@ -729,12 +960,23 @@
   confirmCallback = null;
  });
 
- confirmOkBtn.addEventListener("click", function () {
-  if (typeof confirmCallback === "function") confirmCallback();
-  confirmModal.classList.add("hidden");
-  confirmModal.classList.remove("flex");
-  confirmCallback = null;
- });
+ confirmOkBtn.addEventListener("click", async function () {
+
+    if (typeof confirmCallback === "function") {
+
+        const callback = confirmCallback;
+
+        // Clear callback first
+        confirmCallback = null;
+
+        await callback();
+
+        return;
+    }
+
+    confirmModal.classList.add("hidden");
+    confirmModal.classList.remove("flex");
+});
 
  function openAttendeeModal(attendee) {
   if (attendee) {

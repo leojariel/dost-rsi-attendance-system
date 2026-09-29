@@ -368,9 +368,14 @@
   const btn = overlay.querySelector("#successClose");
   if (!btn) return;
   btn.addEventListener("click", function (e) {
-   e.preventDefault();
-   e.stopPropagation();
-   overlay.remove();
+  e.preventDefault();
+  e.stopPropagation();
+
+  // Remove success modal
+  overlay.remove();
+
+  // Refresh the registration page
+  window.location.href = "index.php";
   });
  }
 

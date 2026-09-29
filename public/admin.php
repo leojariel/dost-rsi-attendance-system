@@ -1214,18 +1214,13 @@
         </p>
         <h1
          class="font-inter text-3xl font-light text-[#002735] dark:text-[#ebf5f8]">
-         Certificate Templates
+         Certificate 
         </h1>
         <p class="font-serif text-sm text-[#7c868a] italic mt-1">
-         Generate and print certificates for confirmed attendees.
+         Preview, download, and print certificates for confirmed attendees.
         </p>
        </div>
-       <button
-        type="button"
-        id="printAllCerts"
-        class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2.5 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer">
-        Print All
-       </button>
+       
       </div>
 
       <div
@@ -1621,28 +1616,45 @@
  </div>
 
  <div
-  id="certModal"
-  class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0b1214]/90 backdrop-blur-sm px-4 py-8 overflow-y-auto">
-  <div class="my-auto flex flex-col items-center gap-4">
-   <div class="flex items-center gap-3">
-    <button
-     type="button"
-     id="certCloseBtn"
-     class="font-inter text-[10px] tracking-[0.25em] uppercase text-white border border-white/40 px-4 py-2 hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer">
-     Close
-    </button>
-    <button
-     type="button"
-     id="certPrintBtn"
-     class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer">
-     Print
-    </button>
-   </div>
-   <div id="certModalContent" class="bg-white shadow-2xl"></div>
-  </div>
- </div>
+ id="certModal"
+ class="fixed inset-0 z-50 hidden items-center justify-center bg-[#0b1214]/90 backdrop-blur-sm px-4 py-8 overflow-y-auto">
 
- <div id="certPrintArea" class="hidden"></div>
+ <div class="my-auto flex flex-col items-center gap-4 w-full">
+
+  <div class="flex items-center gap-3">
+
+   <button
+    type="button"
+    id="certCloseBtn"
+    class="font-inter text-[10px] tracking-[0.25em] uppercase text-white border border-white/40 px-4 py-2 hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer">
+    Close
+   </button>
+
+   <button
+    type="button"
+    id="certDownloadBtn"
+    class="font-inter text-[10px] tracking-[0.25em] uppercase border border-white/40 text-white px-4 py-2 hover:border-[#00adec] hover:text-[#00adec] transition-colors cursor-pointer">
+    Download
+   </button>
+
+   <button
+    type="button"
+    id="certPrintBtn"
+    class="font-inter text-[10px] tracking-[0.25em] uppercase bg-[#00adec] text-white px-4 py-2 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors cursor-pointer">
+    Print
+   </button>
+
+  </div>
+
+  <div
+   id="certModalContent"
+   class="bg-white shadow-2xl w-full flex justify-center">
+  </div>
+
+ </div>
+</div>
+
+ 
  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
  <script src="../src/js/admin.js"></script>
 </body>
