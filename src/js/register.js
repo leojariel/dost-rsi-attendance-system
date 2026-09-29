@@ -30,7 +30,7 @@
    firstName: [document.getElementById("firstName")],
    lastName: [document.getElementById("lastName")],
    gender: [document.getElementById("gender")],
-   ageRange: Array.from(document.querySelectorAll('input[name="ageRange"]')),
+   ageRange: [document.getElementById("ageRange")],
    classification: [document.getElementById("classification")],
    contactEmail: [document.getElementById("contactEmail")],
    visitorType: Array.from(
@@ -76,7 +76,6 @@
 
  function collectFormData() {
   const fd = new FormData(form);
-  const ageRange = form.querySelector('input[name="ageRange"]:checked');
   const visitorType = form.querySelector('input[name="visitorType"]:checked');
 
   return {
@@ -85,7 +84,7 @@
    middleName: (fd.get("middleName") || "").toString().trim(),
    lastName: (fd.get("lastName") || "").toString().trim(),
    gender: (fd.get("gender") || "").toString(),
-   ageRange: ageRange ? ageRange.value : "",
+   ageRange: (fd.get("ageRange") || "").toString().trim(),
    classification: (fd.get("classification") || "").toString(),
    contactEmail: (fd.get("contactEmail") || "").toString().trim(),
    visitorType: visitorType ? visitorType.value : "",

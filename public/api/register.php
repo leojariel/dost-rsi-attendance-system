@@ -12,7 +12,6 @@ $in = json_in();
 
 // ── Whitelists (same as validate.php) ─────────────────────────
 $GENDERS = ['male', 'female', 'other'];
-$AGE_RANGES = ['1-14', '15-30', '31-59', '60+'];
 $CLASSIFICATIONS = ['business', 'government', 'homemaker', 'media', 'others', 'private', 'student'];
 $VISITOR_TYPES = ['exhibitor', 'organizer', 'participant', 'speaker', 'volunteer'];
 $REGION_IDS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17'];
@@ -55,8 +54,17 @@ if (!in_array($gender, $GENDERS, true)) {
 }
 
 $ageRange = field($in, 'ageRange');
-if (!in_array($ageRange, $AGE_RANGES, true)) {
- $errors['ageRange'] = 'Invalid age range.';
+if ($ageRange === '') {
+ $errors['ageRange'] = 'Age is required.';
+} elseif (!ctype_digit($ageRange)) {
+ $errors['ageRange'] = 'Age must be a whole number.';
+} else {
+ $ageInt = (int)$ageRange;
+ if ($ageInt < 1 || $ageInt > 120) {
+  $errors['ageRange'] = 'Age must be between 1 and 120.';
+ } else {
+  $ageRange = (string)$ageInt;
+ }
 }
 
 $classification = field($in, 'classification');

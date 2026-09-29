@@ -59,16 +59,7 @@
   <div
    class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
    <a href="./index.html" class="flex items-center gap-2 text-[#002735]">
-    <svg
-     class="w-6 h-6"
-     viewBox="0 0 24 24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.5"
-     aria-hidden="true">
-     <path d="M12 3l9 6-9 6-9-6 9-6Z" stroke-linejoin="round" />
-     <path d="M3 15l9 6 9-6" stroke-linejoin="round" />
-    </svg>
+    <img src="../public/assets/icons/dost-logo.svg" class="w-6 h-6" alt="">
     <span class="font-medium tracking-wide text-sm uppercase">DOST · 8th RSI Forum</span>
    </a>
    <nav
@@ -89,7 +80,7 @@
       rgba(0, 39, 53, 0.72) 55%,
       #002735 100%
      ),
-     url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJhIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgxMCkiPjxwYXRoIGQ9Ik0wIDBMNjAgNjBNNjAgMEwwIDYwIiBzdHJva2U9IiMwMGFkZWMiIHN0cm9rZS13aWR0aD0iMC40IiBvcGFjaXR5PSIwLjE1Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDAyNzM1Ii8+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==&quot;);
+     url(&quot;../public/assets/images/home-background.png&quot;);
    "
   aria-labelledby="page-heading">
   <div
@@ -102,14 +93,13 @@
     <h1
      id="page-heading"
      class="font-inter text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-[#ebf5f8] leading-[1.05]">
-     8th Research,<br />
-     Statistic, and<br />
+     8th Regional<br />
+     Science and<br />
      Innovation Forum
     </h1>
     <p
      class="font-serif mt-6 text-[#ebf5f8]/80 max-w-xl text-base md:text-lg leading-relaxed">
-     Siensya, Teknolohiya, at Inobasyon: Kabalikat sa Matatag at Panatag na
-     Kinabukasan.
+     Fostering a Resilient Tomorrow: Mobilizing Data and Digital Innovation for Sustainable Development Goal Progress, Food, Energy, and Tourism.
     </p>
    </div>
 
@@ -182,7 +172,7 @@
  </div>
 
  <main class="w-full bg-white grid-paper">
-  <form id="registrationForm" novalidate onsubmit="return false" class="max-w-7xl mx-auto px-4 md:px-8 py-16">
+  <form id="registrationForm" novalidate onsubmit="return false" autocomplete="off" class="max-w-7xl mx-auto px-4 md:px-8 py-16">
    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
     <aside class="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
      <div class="border-l-2 border-[#00adec] pl-6">
@@ -374,59 +364,28 @@
         <p class="error-msg" data-error-for="classification"></p>
        </div>
 
-       <fieldset class="md:col-span-12" aria-describedby="ageHelp">
-        <legend
-         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-3">
-         Age Range <span class="text-[#00adec]" aria-hidden="true">*</span>
-         <span id="ageHelp" class="sr-only">Select one age range</span>
-        </legend>
-        <div
-         class="grid grid-cols-2 sm:grid-cols-4 gap-3"
-         role="radiogroup"
-         aria-label="Age Range">
-         <label class="cursor-pointer">
-          <input
-           type="radio"
-           name="ageRange"
-           value="1-14"
-           required
-           class="sr-only peer" />
-          <span
-           class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">1–14</span>
-         </label>
-         <label class="cursor-pointer">
-          <input
-           type="radio"
-           name="ageRange"
-           value="15-30"
-           required
-           class="sr-only peer" />
-          <span
-           class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">15–30</span>
-         </label>
-         <label class="cursor-pointer">
-          <input
-           type="radio"
-           name="ageRange"
-           value="31-59"
-           required
-           class="sr-only peer" />
-          <span
-           class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">31–59</span>
-         </label>
-         <label class="cursor-pointer">
-          <input
-           type="radio"
-           name="ageRange"
-           value="60+"
-           required
-           class="sr-only peer" />
-          <span
-           class="font-inter block text-center text-xs tracking-[0.15em] uppercase py-3 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#002735] peer-checked:text-[#ebf5f8] peer-checked:border-[#002735] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">60+</span>
-         </label>
-         <p class="error-msg" data-error-for="ageRange"></p>
-        </div>
-       </fieldset>
+       <div class="md:col-span-6">
+        <label
+         for="ageRange"
+         class="font-inter block text-[10px] tracking-[0.2em] text-[#35393a] uppercase mb-2">
+         Age <span class="text-[#00adec]" aria-hidden="true">*</span>
+        </label>
+        <input
+         type="number"
+         id="ageRange"
+         name="ageRange"
+         min="1"
+         max="120"
+         step="1"
+         required
+         aria-required="true"
+         placeholder="e.g. 24"
+         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] placeholder:text-[#7c868a]/60 focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+        <p class="error-msg" data-error-for="ageRange"></p>
+        <p class="font-serif text-xs text-[#7c868a] mt-2">
+         Enter your age in years (1–120).
+        </p>
+       </div>
       </div>
      </section>
 
