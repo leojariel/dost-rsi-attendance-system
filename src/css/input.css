@@ -1,8 +1,45 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+@import url("https://fonts.cdnfonts.com/css/agrandir");
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
- --font-inter-tight: "Inter Tight", sans-serif;
+  --font-primary: "Agrandir", "Segoe UI", sans-serif;
+  --font-secondary: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-secondary);
+  --font-inter-tight: var(--font-primary);
 }
+
+:root {
+  --font-primary: "Agrandir", "Segoe UI", sans-serif;
+  --font-secondary: "Roboto", "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body {
+  font-family: var(--font-secondary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading,
+.title,
+.display {
+  font-family: var(--font-primary);
+}
+
+button,
+input,
+textarea,
+select,
+label,
+small,
+.caption,
+.subtext {
+  font-family: inherit;
+}
+
